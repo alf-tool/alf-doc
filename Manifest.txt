@@ -1,0 +1,12 @@
+doc.gemspec
+doc.noespec
+CHANGELOG.md
+Gemfile
+Gemfile.lock
+lib/**/*
+LICENCE.md
+Manifest.txt
+Rakefile
+README.md
+spec/**/*
+tasks/**/*
