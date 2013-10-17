@@ -1,0 +1,14 @@
+- name: among
+  synopsis: |-
+    Among a set of values
+  description: |-
+    This predicates checks whether `val` belongs to the set of values `vals`.
+  notes: |-
+    The set `vals` may only contain pure values, attribute names are not
+    supported. Any enumerable of such values is supported in practice, e.g.
+    an Array literal.
+  signature: |-
+    val:Alpha|AttrName, vals:Set<Alpha>
+  examples: 
+    - |-
+      among(:status, [10, 30])

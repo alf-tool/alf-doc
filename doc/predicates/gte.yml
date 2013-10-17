@@ -1,0 +1,15 @@
+- name: gte
+  synopsis: |-
+    Greater than or equal to
+  description: |-
+    This predicates checks whether a value (`left`) is greater than or equal
+    to another one (`right`).
+  notes: |-
+    This predicate is equivalent to `->(t){ _left_ >= _right_ }`.
+  signature: |-
+    left:Alpha|AttrName, right:Alpha|AttrName
+  examples: 
+    - |-
+      gte(:status, 20)
+    - |-
+      gte(:status, 30)

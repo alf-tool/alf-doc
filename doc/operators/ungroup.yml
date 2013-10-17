@@ -1,0 +1,20 @@
+- name: ungroup
+  synopsis: |-
+    Inverse of group
+  description: |-
+    Computes the relation obtained by ungrouping a relation-valued attribute
+    `rva`. Ungrouping `rva` leads as many tuples as in `rva`, each extended
+    with the other attributes of `operand`.
+    
+    `rva` must be a relation-valued attribute. It should not itself contain
+    any attribute whose name clashes with an attribute of `operand`.
+  notes: |-
+    This operator does not compile to SQL so far. Contributions are welcome
+    to provide it with a SQL compilation for SQL DBMSs that support this kind
+    of feature (e.g. PostgreSQL with JSON data type)
+  signature: |-
+    operand:Relation, rva:AttrName
+  options: |-
+  examples:
+    - |-
+      ungroup(group(suppliers, [:city], :suppliers, allbut: true), :suppliers)

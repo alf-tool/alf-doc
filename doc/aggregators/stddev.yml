@@ -1,0 +1,19 @@
+- name: stddev
+  synopsis: |-
+    Standard deviation
+  description: |-
+    Computes how much variation from the average exists.
+  notes: |-
+    This aggregate function should only be used with numeric types. As of
+    current Alf version, it does not aggregate empty sets correctly on
+    non-numeric data types.
+  signature: |-
+    expr: AttrName|(Tuple->Numeric)
+  options: |-
+  examples:
+    - |-
+      stddev(:qty)
+    - |-
+      stddev{|t| t.qty * t.price }
+    - |-
+      stddev(->(t){ t.qty * t.price })

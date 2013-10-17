@@ -1,0 +1,21 @@
+- name: native
+  synopsis: |-
+    User-defined tuple predicate
+  description: |-
+    So called 'native' predicates are functions computing truth values from
+    tuples.
+  notes: |-
+    Native predicates can be any ruby Proc object of arity 1. The argument
+    will be a Tuple instance. the Proc SHOULD return true or false, but ruby
+    patterns for boolean expressions are supported to (such a nil evaluating
+    to false, etc.).
+
+    Note that, as of current Alf version, native predicates cannot be delegated
+    to an underlying data engine, and are not compiled to SQL in particular.
+    Please always use predicate factories such as `eq(:city, 'London')` if
+    possible, as they do not hurt logical optimizations and compilation.
+  signature: |-
+    predicate: (Tuple -> Boolean)
+  examples:
+    - |-
+      ->(t){ t.city == 'London' }

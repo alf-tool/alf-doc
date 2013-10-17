@@ -1,0 +1,19 @@
+- name: avg
+  synopsis: |-
+    Average
+  description: |-
+    Aggregates through `v1 + v2 + ... + vn / n`.
+  notes: |-
+    This aggregate function should only be used with numeric types. As of
+    current Alf version, it does not aggregate empty sets correctly on
+    non-numeric data types.
+  signature: |-
+    expr: AttrName|(Tuple->Numeric)
+  options: |-
+  examples:
+    - |-
+      avg(:qty)
+    - |-
+      avg{|t| t.qty * t.price }
+    - |-
+      avg(->(t){ t.qty * t.price })

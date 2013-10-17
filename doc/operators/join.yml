@@ -1,0 +1,67 @@
+- name: join
+  synopsis: |-
+    Natural join
+  description: |-
+    Computes the relation resuting from joining tuples from `left` and `right`
+    whose respective projections on common attributes are equal.
+  notes: |-
+    Alf only support natural join for now. Other kinds of join can generally
+    be computed through longer expressions. For instance, joining on attributes
+    with different names requires some renaming first:
+    
+    ```
+    # suppose preferences has type Relation[supplier_id: String, ...]
+    # suppose we want to join on suppliers.sid == preferences.supplier_id
+    join(suppliers, rename(preferences, :supplier_id => :sid))
+    ```
+    
+    Cross joins can be computed through operands having no attribute in common.
+    For instance, all pairs of supplier and part identifiers can be computed
+    as follows:
+    
+    ```
+    pairs = join(project(suppliers, [:sid]), project(parts, [:pid]))
+    ```
+    
+    Non equi-joins can be computed through a latter restriction. For instance,
+    the (supplier, part) pairs not located in the same city:
+    
+    ```
+    ps = project(rename(parts, :city => :part_city), [:pid, :part_city])
+    ss = project(rename(suppliers, :city => :supplier_city), [:sid, :supplier_city])
+    pairs = join(ps, ss)
+    project(restrict(pairs, neq(:part_city, :supplier_city)), [:sid, :pid])
+    ```
+    
+    As obviously demonstrated by the example above, such kind of query is
+    rather cumbersome to write and verbous. Future versions of Alf will come
+    with useful shortcuts and new operators. In the mean time, don't forget
+    that defining your own shortcuts and operators is somewhat easy! Don't
+    hesitate to contribute them if of general purpose.
+    
+    Last, natural joins tend to be error prone; in particular, you must take
+    care of common attributes of your design on which you do not want to join
+    (such as `latest_change` and `deleted` fields and the like). Renamings and
+    projections are worth having at hand when joining.
+    
+    Alternatively, shortcuts can be considered. A (advanced) example below:
+
+    ```
+    # The following shortcut joins `left` and `right` on `wish` attributes
+    # only. Other common attributes are simply projected away from `right`
+    # before joining.
+    def join_on(left, right, wish)
+      commons = left.attr_list & right.attr_list
+      join(left, allbut(right, commons - wish))
+    end
+
+    # observe here how part names have been discarded to avoid joining them
+    # with supplier names (empty result guaranteed)
+    join_on(suppliers, parts, [:city])
+    ```
+  signature: |-
+    left:Relation, right:Relation
+  options: |-
+  examples:
+    - |-
+      join(suppliers, supplies)

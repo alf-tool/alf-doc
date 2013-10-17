@@ -1,0 +1,27 @@
+- name: allbut
+  synopsis: |-
+    Projects a subset of attributes away.
+  description: |-
+    Computes the relation obtained by removing a subset of attributes from
+    `operand` tuples.
+    
+    This operator is the inverse of `project`. While the latter _keeps_
+    attributes, this one _removes_ them. `project` actually supports an allbut
+    variant, which is equivalent to this operator. In other words, this
+    operator can be seen as being the following shortcut:
+    
+    ```
+    def allbut(operand, attributes)
+      project(operand, attributes, allbut: true)
+    end
+    ```
+  notes: |-
+    Unlike SQL, this operator ALWAYS remove duplicates. There is no way, in
+    Alf, to compute _bags_ of tuples.
+  signature: |-
+    operand: Relation, attributes:AttrList
+  options: |-
+    allbut: Boolean
+  examples:
+    - |-
+      allbut(suppliers, [:city])

@@ -1,0 +1,20 @@
+- name: restrict
+  synopsis: |-
+    Predicate-based filtering
+  description: |-
+    Computes a relation as a subset of `operand` tuples for which a tuple
+    predicate evaluates to TRUE.
+  notes: |-
+    As of current Alf version, native predicates (through ruby `Proc` objects)
+    cannot be optimized nor compiled to SQL. The use of high-level predicates
+    (`eq`, `gt`, etc.) is strongly recommanded.
+  signature: |-
+    operand: Relation, predicate:Predicate
+  options: |-
+  examples:
+    - |-
+      restrict(suppliers, city: 'Paris', status: 20)
+    - |-
+      restrict(suppliers, eq(city: 'Paris') & gt(:status, 20))
+    - |-
+      restrict(suppliers, ->(t){ t.city == 'Paris' and t.status > 20 })

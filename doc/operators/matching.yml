@@ -1,0 +1,55 @@
+- name: matching
+  synopsis: |-
+    Aka 'where exists'
+  description: |-
+    Computes a relation as a subset of `left` tuples for which at least one
+    `right` tuple would join on common attributes.
+    
+    This operator, also known as semi-join, can be explained through the
+    shortcut definition below. As shown, it basically consists in joining
+    `left` and `right` relations and then projecting back on `left`
+    attributes.
+    
+    ```
+    def matching(left, right)
+      project(join(left, right), left.attr_list)
+    end
+    ```
+    
+    Or, in SQL terms:
+    
+    ```
+    SELECT left.* FROM left NATURAL JOIN right
+    ```
+    
+    The synonym 'where exists' comes from the fact that, since right
+    attributes are projected away, it may seem more intuitive to think about
+    this operator as filtering tuples from left where _there exists_ some
+    tuple at right that _would_ join. In SQL-ish terms:
+    
+    ```
+    SELECT * FROM left WHERE EXISTS (SELECT * FROM right WHERE [join condition])
+    ```
+  notes: |-
+    As for (natural) `join`, you must take care of ensuring that the list of
+    common attributes on which the matching applies correspond to what you
+    want. Renamings and projections are worth having at hand when joining.
+    Alternatively, shortcuts can be considered. A (advanced) example below:
+    
+    ```
+    # Same as matching(left, right) except that only attributes in `wish`
+    # are take into account in matching.
+    def matching_on(left, right, wish)
+      matching(left, project(right, wish))
+    end
+    
+    # observe here how part names have been discarded to avoid matching them
+    # with supplier names (empty result guaranteed)
+    matching_on(suppliers, parts, [:city])
+    ```
+  signature: |-
+    left:Relation, right:Relation
+  options: |-
+  examples:
+    - |-
+      matching(suppliers, supplies)

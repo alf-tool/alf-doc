@@ -1,0 +1,18 @@
+- name: max
+  synopsis: |-
+    Maximal value
+  description: |-
+    Returns the greatest of input values.
+  notes: |-
+    This aggregate function must only be used with comparable types. As of
+    current Alf version, it does not aggregate empty sets correctly.
+  signature: |-
+    expr: AttrName|(Tuple->Numeric)
+  options: |-
+  examples:
+    - |-
+      max(:qty)
+    - |-
+      max{|t| t.qty * t.price }
+    - |-
+      max(->(t){ t.qty * t.price })

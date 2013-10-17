@@ -1,0 +1,42 @@
+- name: intersect
+  synopsis: |-
+    Logical AND
+  description: |-
+    Computes the relation as the set intersection of `left` and `right`
+    tuples.
+    
+    The `left` and `right` relations must be intersect-compatible, which in
+    short means that they must have same heading (type inheritance is partly
+    supported through ruby's own type system, so that the actual behavior is
+    slighlty more permissive).
+  notes: |-
+    Unlike SQL, this operator ALWAYS remove duplicates. There is no way, in
+    Alf, to compute _bags_ of tuples and therefore no way to express something
+    such as INTERSECT ALL.
+    
+    It is sometimes idiomatic in Alf to use `intersect` as a logical AND, such
+    as the example below. So far, the optimizer/compiler is not smart enough
+    to translate the former in the latter (which is likely to have a better
+    query plan, especially when using the SQL compiler and usual SQL DBMSs).
+    Any patch is welcome here too!
+    
+    ```
+    intersect(
+      restrict(suppliers, eq(:city, 'Paris')),
+      restrict(suppliers, gt(:status, 10)))
+    ```
+
+    is equivalent to
+
+    ```
+    restrict(suppliers, eq(:city, 'Paris') & gt(:status, 10))
+    ```
+    
+  signature: |-
+    left: Relation, right: Relation
+  options: |-
+  examples:
+    - |-
+      intersect(
+        restrict(suppliers, eq(:city, 'Paris')),
+        restrict(suppliers, gt(:status, 10)))

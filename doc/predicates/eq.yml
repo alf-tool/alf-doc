@@ -1,0 +1,14 @@
+- name: eq
+  synopsis: |-
+    Equals to
+  description: |-
+    This predicates checks whether two values are equal.
+  notes: |-
+    This predicate is equivalent to `->(t){ _left_ == _right_ }`.
+  signature: |-
+    left:Alpha|AttrName, right:Alpha|AttrName
+  examples: 
+    - |-
+      eq(:city, 'London')
+    - |-
+      eq(:supplier_city, :part_city)
