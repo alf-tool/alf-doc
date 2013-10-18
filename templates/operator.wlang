@@ -1,0 +1,28 @@
+# +{name.capitalize}
+
++{synopsis}
+
+## Signature
+
+```
++{name}(+{signature})
+```
+
+## Examples
+
+*{examples}{
+
+```try
++{self}
+```
+}
+
+## Description
+
++{description}
+
+?{notes.strip.empty?}{}{
+## Implementation notes
+
++{notes}
+}

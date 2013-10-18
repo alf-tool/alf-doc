@@ -4,7 +4,10 @@ require_relative 'doc/viewpoint'
 module Alf
   module Doc
 
-    DOC_ROOT = Path.dir.parent.parent/"doc"
+    ROOT = Path.dir.parent.parent
+
+    DOC_ROOT = ROOT/"doc"
+
     DB = Alf.connect(Path.dir, viewpoint: Viewpoint[])
 
     def self.query(*args, &bl)
@@ -18,6 +21,10 @@ module Alf
           operators: operators,
           aggregators: aggregators)
       }
+    end
+
+    def self.pages
+      (ROOT/'pages').glob("*.md")
     end
 
   end # module Doc
