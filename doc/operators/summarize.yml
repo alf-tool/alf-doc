@@ -1,28 +1,28 @@
-- name: summarize
-  synopsis: |-
-    Aggregate and compute
-  description: |-
-    Computes the relation obtained by taking the projection of `operand`
-    on `by` attributes then extending each tuple `t` with the result of
-    aggregations defined by `aggs` on the tuples from `operand` matching `t`.
-    
-    In SQL-ish terms, `SELECT [by], [agg] FROM operand GROUP BY [by]`.
-  notes: |-
-    As of current Alf version, this operator cannot be translated to SQL code.
-    That means that all computations are done in ruby, which may seriously
-    hurt performance.
-    
-    Similarly, as `summarize` tends to be a showstopper during compilation, it
-    is strongly recommanded to use it as high as possible in query expressions
-    trees so as to delegate the largest possible query parts to data engines.
-  signature: |-
-    operand:Relation, by:AttrList, aggs:Summarization
-  options: |-
-    allbut: Boolean
-  examples:
-    - |-
-      summarize(supplies, [:sid], total: sum(:qty))
-    - |-
-      summarize(supplies, [:sid], total: sum{|t| t.qty * 2 })
-    - |-
-      summarize(supplies, [:pid, :qty], {total: sum{|t| t.qty * 2 }}, allbut: true)
+name: summarize
+synopsis: |-
+  Aggregate and compute
+description: |-
+  Computes the relation obtained by taking the projection of `operand`
+  on `by` attributes then extending each tuple `t` with the result of
+  aggregations defined by `aggs` on the tuples from `operand` matching `t`.
+  
+  In SQL-ish terms, `SELECT [by], [agg] FROM operand GROUP BY [by]`.
+notes: |-
+  As of current Alf version, this operator cannot be translated to SQL code.
+  That means that all computations are done in ruby, which may seriously
+  hurt performance.
+  
+  Similarly, as `summarize` tends to be a showstopper during compilation, it
+  is strongly recommanded to use it as high as possible in query expressions
+  trees so as to delegate the largest possible query parts to data engines.
+signature: |-
+  operand: Relation, by: AttrList, aggs: Summarization
+options: |-
+  allbut: Boolean
+examples:
+  - |-
+    summarize(supplies, [:sid], total: sum(:qty))
+  - |-
+    summarize(supplies, [:sid], total: sum{|t| t.qty * 2 })
+  - |-
+    summarize(supplies, [:pid, :qty], {total: sum{|t| t.qty * 2 }}, allbut: true)

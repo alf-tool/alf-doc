@@ -1,11 +1,11 @@
-- name: count
-  synopsis: |-
-    Count
-  description: |-
-    Counts the number of input values.
-  notes: |-
-  signature: |-
-  options: |-
-  examples:
-    - |-
-      count()
+name: count
+synopsis: |-
+  Count
+description: |-
+  Counts the number of input values.
+notes: |-
+signature: |-
+options: |-
+examples:
+  - |-
+    count()

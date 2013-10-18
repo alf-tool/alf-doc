@@ -1,45 +1,45 @@
-- name: page
-  synopsis: |-
-    Pagination
-  description: |-
-    Computes a relation by restricting the tuples of `operand` that below to
-    the `nth` page (starting at 1). When `nth` is negative, returns tuples
-    that belong to the `nth` page from the end (e.g., -1 is last page).
-    
-    Formally, the page is defined by those tuples whose ranking according to
-    `order` is such that `(nth-1)*page_size <= rank < nth*page_size`. In
-    other words, this operator is actually equivalent to the following
-    definition (ignoring negative page indexes for simplicity):
-    
-    ```
-    def page(operand, order, nth, page_size)
-      allbut(
-        restrict(
-          rank(operand, order, :rank),
-          lte((nth-1)*page_size, :rank) & lt(:rank, nth*page_size)),
-        [:rank])
-    end
-    ```
-    
-    As of current Alf version, for this operator to be semantically sound and
-    deterministic, `order` MUST be a total order, that is, it must at least
-    cover a candidate key. As of current Alf version, no error is raised if
-    this is not the case but that might change in future versions.
-  notes: |-
-    Contrary to the longer expression shown above, this operator compiles to
-    SQL (rank does not, so far) at the cost of having to provide a total
-    order.
-    
-    As the result is a relation and relations are not ordered by definition,
-    the order in which tuples can be observed in the result (e.g. through
-    explicit tuple iteration, casting to an array, json encoding) is NOT
-    guaranteed to follow `order`.
-  signature: |-
-    operand:Relation, ordering:Ordering, nth:Integer
-  options: |-
-    page_size:Integer
-  examples:
-    - |-
-      page(suppliers, [:status, :sid], 1, page_size: 3)
-    - |-
-      page(suppliers, [:status, :sid], -1, page_size: 3)
+name: page
+synopsis: |-
+  Pagination
+description: |-
+  Computes a relation by restricting the tuples of `operand` to those
+  belonging to the `nth` page (starting at 1). When `nth` is negative, returns
+  tuples that belong to the `nth` page from the end (e.g., -1 is last page).
+  
+  Formally, the page is defined by those tuples whose ranking according to
+  `order` is such that `(nth-1)*page_size <= rank < nth*page_size`. In
+  other words, this operator is actually equivalent to the following
+  definition (ignoring negative page indexes for simplicity):
+  
+  ```try
+  def page(operand, order, nth, page_size)
+    allbut(
+      restrict(
+        rank(operand, order, :rank),
+        lte((nth-1)*page_size, :rank) & lt(:rank, nth*page_size)),
+      [:rank])
+  end
+  ```
+  
+  As of current Alf version, for this operator to be semantically sound and
+  deterministic, `order` MUST be a total order, that is, it must at least
+  cover a candidate key. As of current Alf version, no error is raised if
+  this is not the case but that might change in future versions.
+notes: |-
+  Contrary to the longer expression shown above, this operator compiles to
+  SQL (rank does not, so far) at the cost of having to provide a total
+  order.
+  
+  As the result is a relation and relations are not ordered by definition,
+  the order in which tuples can be observed in the result (e.g. through
+  explicit tuple iteration, casting to an array, json encoding) is NOT
+  guaranteed to follow `order`.
+signature: |-
+  operand: Relation, ordering: Ordering, nth: Integer
+options: |-
+  page_size: Integer
+examples:
+  - |-
+    page(suppliers, [:status, :sid], 1, page_size: 3)
+  - |-
+    page(suppliers, [:status, :sid], -1, page_size: 3)

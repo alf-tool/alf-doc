@@ -1,15 +1,15 @@
-- name: gt
-  synopsis: |-
-    Greater than
-  description: |-
-    This predicates checks whether a value (`left`) is greater than another
-    one (`right`).
-  notes: |-
-    This predicate is equivalent to `->(t){ _left_ > _right_ }`.
-  signature: |-
-    left:Alpha|AttrName, right:Alpha|AttrName
-  examples: 
-    - |-
-      gt(:status, 20)
-    - |-
-      gt(:status, 30)
+name: gt
+synopsis: |-
+  Greater than
+description: |-
+  This predicates checks whether a value (`left`) is greater than another
+  one (`right`).
+notes: |-
+  This predicate is equivalent to `->(t){ _left_ > _right_ }`.
+signature: |-
+  left: Alpha|AttrName, right: Alpha|AttrName
+examples: 
+  - |-
+    gt(:status, 20)
+  - |-
+    gt(:status, 30)

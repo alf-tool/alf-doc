@@ -1,13 +1,13 @@
-- name: between
-  synopsis: |-
-    Between (inclusive)
-  description: |-
-    This predicates checks whether a value (`val`) is between two bounds `min`
-    and `max`, inclusive on both sides.
-  notes: |-
-    This predicate is equivalent to `gte(_val_,_min_) & lte(_val_,_max_)`.
-  signature: |-
-    val:Alpha|AttrName, min:Alpha|AttrName, max:Alpha|AttrName
-  examples: 
-    - |-
-      between(:status, 10, 30)
+name: between
+synopsis: |-
+  Between (inclusive)
+description: |-
+  This predicates checks whether a value (`val`) is between two bounds `min`
+  and `max`, inclusive on both sides.
+notes: |-
+  This predicate is equivalent to `gte(_val_,_min_) & lte(_val_,_max_)`.
+signature: |-
+  val: Alpha|AttrName, min: Alpha|AttrName, max: Alpha|AttrName
+examples: 
+  - |-
+    between(:status, 10, 30)

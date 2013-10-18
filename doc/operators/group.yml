@@ -1,36 +1,36 @@
-- name: group
-  synopsis: |-
-    Relation-valued attribute
-  description: |-
-    Computes the relation obtained by taking the allbut-projection of `operand`
-    on `attributes` then extending each tuple `t` with a relation-valued
-    attribute `as`; the latter is defined as a restriction/projection of
-    operand. Restriction on tuples matching `t` and projected on `attributes`.
-    
-    In other words, this operator could be formally defined as the following
-    shortcut:
-    
-    ```
-    def group(operand, attributes, as)
-      extend(
-        allbut(operand, attributes),
-        as: ->(t){ project(matching(operand, Relation(t)), attributes) })
-    end
-    ```
-    
-    This operators supports an ALL BUT variant, through the `allbut` option.
-    When set to true, the operator keeps specified attributes and groups all
-    remaining ones as a relation-valued attribute.
-  notes: |-
-    This operator does not compile to SQL so far. Contributions are welcome
-    to provide it with a SQL compilation for SQL DBMSs that support this kind
-    of feature (e.g. PostgreSQL with JSON data type)
-  signature: |-
-    operand:Relation, attributes:AttrList, as:AttrName
-  options: |-
-    allbut: Boolean
-  examples:
-    - |-
-      group(suppliers, [:sid, :name, :status], :suppliers)
-    - |-
-      group(suppliers, [:city], :suppliers, allbut: true)
+name: group
+synopsis: |-
+  Relation-valued attribute
+description: |-
+  Computes the relation obtained by taking the allbut-projection of `operand`
+  on `attributes` then extending each tuple `t` with a relation-valued
+  attribute `as`; the latter is defined as a restriction/projection of
+  operand. Restriction on tuples matching `t` and projected on `attributes`.
+  
+  In other words, this operator could be formally defined as the following
+  shortcut:
+  
+  ```try
+  def group(operand, attributes, as)
+    extend(
+      allbut(operand, attributes),
+      as: ->(t){ project(matching(operand, Relation(t)), attributes) })
+  end
+  ```
+  
+  This operators supports an ALL BUT variant, through the `allbut` option.
+  When set to true, the operator keeps specified attributes and groups all
+  remaining ones as a relation-valued attribute.
+notes: |-
+  This operator does not compile to SQL so far. Contributions are welcome
+  to provide it with a SQL compilation for SQL DBMSs that support this kind
+  of feature (e.g. PostgreSQL with JSON data type)
+signature: |-
+  operand: Relation, attributes: AttrList, as: AttrName
+options: |-
+  allbut: Boolean
+examples:
+  - |-
+    group(suppliers, [:sid, :name, :status], :suppliers)
+  - |-
+    group(suppliers, [:city], :suppliers, allbut: true)

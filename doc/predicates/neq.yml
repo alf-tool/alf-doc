@@ -1,14 +1,14 @@
-- name: neq
-  synopsis: |-
-    Not equal to
-  description: |-
-    This predicates checks whether two values are different.
-  notes: |-
-    This predicate is equivalent to `->(t){ _left_ != _right_ }`.
-  signature: |-
-    left:Alpha|AttrName, right:Alpha|AttrName
-  examples: 
-    - |-
-      neq(:city, 'London')
-    - |-
-      neq(:supplier_city, :part_city)
+name: neq
+synopsis: |-
+  Not equal to
+description: |-
+  This predicates checks whether two values are different.
+notes: |-
+  This predicate is equivalent to `->(t){ _left_ != _right_ }`.
+signature: |-
+  left: Alpha|AttrName, right: Alpha|AttrName
+examples: 
+  - |-
+    neq(:city, 'London')
+  - |-
+    neq(:supplier_city, :part_city)

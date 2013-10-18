@@ -1,15 +1,15 @@
-- name: lte
-  synopsis: |-
-    Less than or equal to
-  description: |-
-    This predicates checks whether a value (`left`) is less than or equal to
-    another one (`right`).
-  notes: |-
-    This predicate is equivalent to `->(t){ _left_ <= _right_ }`.
-  signature: |-
-    left:Alpha|AttrName, right:Alpha|AttrName
-  examples: 
-    - |-
-      lte(:status, 20)
-    - |-
-      lte(:status, 30)
+name: lte
+synopsis: |-
+  Less than or equal to
+description: |-
+  This predicates checks whether a value (`left`) is less than or equal to
+  another one (`right`).
+notes: |-
+  This predicate is equivalent to `->(t){ _left_ <= _right_ }`.
+signature: |-
+  left: Alpha|AttrName, right: Alpha|AttrName
+examples: 
+  - |-
+    lte(:status, 20)
+  - |-
+    lte(:status, 30)

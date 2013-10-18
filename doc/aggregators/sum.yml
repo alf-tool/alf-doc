@@ -1,19 +1,19 @@
-- name: sum
-  synopsis: |-
-    Arithmetic sum
-  description: |-
-    Computes `v1 + v2 + ... + vn`.
-  notes: |-
-    This aggregate function should only be used with numeric types. As of
-    current Alf version, it does not aggregate empty sets correctly on
-    non-numeric data types.
-  signature: |-
-    expr: AttrName|(Tuple->Numeric)
-  options: |-
-  examples:
-    - |-
-      sum(:qty)
-    - |-
-      sum{|t| t.qty * t.price }
-    - |-
-      sum(->(t){ t.qty * t.price })
+name: sum
+synopsis: |-
+  Arithmetic sum
+description: |-
+  Computes `v1 + v2 + ... + vn`.
+notes: |-
+  This aggregate function should only be used with numeric types. As of
+  current Alf version, it does not aggregate empty sets correctly on
+  non-numeric data types.
+signature: |-
+  expr: AttrName|(Tuple->Numeric)
+options: |-
+examples:
+  - |-
+    sum(:qty)
+  - |-
+    sum{|t| t.qty * t.price }
+  - |-
+    sum(->(t){ t.qty * t.price })

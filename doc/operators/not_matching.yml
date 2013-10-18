@@ -1,37 +1,37 @@
-- name: not_matching
-  synopsis: |-
-    Aka 'where not exists'
-  description: |-
-    Computes a relation as a subset of `left` tuples for which no tuple from
-    `right` would join on common attributes.
-    
-    This operator is the inverse of `matching`, as the shortcut definition
-    below shows. It keeps all tuples from `left` but those that matches on
-    right.
-    
-    ```
-    def not_matching(left, right)
-      minus(left, matching(left, right))
-    end
-    ```
-    
-    The synonym 'where not exists' comes from the fact that, since right
-    attributes do not appear in the result, it may seem more intuitive to
-    think about this operator as filtering tuples from left where _there does
-    not exist_ any tuple from right that _would_ join. In SQL-ish terms:
-    
-    ```
-    SELECT * FROM left WHERE NOT EXISTS (SELECT * FROM right WHERE [join condition])
-    ```
-    
-  notes: |-
-    As for join and matching, you must take care of ensuring that the list of
-    common attributes on which the (not) matching applies correspond to what
-    you want. Renamings and projections are worth having at hand.
-    Alternatively, shortcuts can be considered (see `matching` and `join`).
-  signature: |-
-    left:Relation, right:Relation
-  options: |-
-  examples:
-    - |-
-      not_matching(suppliers, supplies)
+name: not_matching
+synopsis: |-
+  Aka 'where not exists'
+description: |-
+  Computes a relation as a subset of `left` tuples for which no tuple from
+  `right` would join on common attributes.
+  
+  This operator is the inverse of `matching`, as the shortcut definition
+  below shows. It keeps all tuples from `left` but those that matches on
+  right.
+  
+  ```try
+  def not_matching(left, right)
+    minus(left, matching(left, right))
+  end
+  ```
+  
+  The synonym 'where not exists' comes from the fact that, since right
+  attributes do not appear in the result, it may seem more intuitive to
+  think about this operator as filtering tuples from left where _there does
+  not exist_ any tuple from right that _would_ join. In SQL-ish terms:
+  
+  ```
+  SELECT * FROM left WHERE NOT EXISTS (SELECT * FROM right WHERE [join condition])
+  ```
+  
+notes: |-
+  As for join and matching, you must take care of ensuring that the list of
+  common attributes on which the (not) matching applies corresponds to what
+  you want. Renamings and projections are worth having at hand.
+  Alternatively, shortcuts can be considered (see `matching` and `join`).
+signature: |-
+  left: Relation, right: Relation
+options: |-
+examples:
+  - |-
+    not_matching(suppliers, supplies)

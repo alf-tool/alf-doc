@@ -1,24 +1,24 @@
-- name: wrap
-  synopsis: |-
-    Tuple-valued attribute
-  description: |-
-    Computes the relation obtained by removing `attributes` and replacing them
-    by a single attribute (`as`). The latter is a tuple-valued attribute
-    obtained by projecting the input tuple on `attributes`.
-    
-    This operators supports an ALL BUT variant, through the `allbut` option.
-    When set to true, the operator keeps specified attributes and wraps all
-    the remaining ones as a tuple-valued attribute.
-  notes: |-
-    This operator does not compile to SQL so far. Contributions are welcome
-    to provide it with a SQL compilation for SQL DBMSs that support this kind
-    of feature (e.g. PostgreSQL with JSON data type)
-  signature: |-
-    operand:Relation, attributes:AttrList, as:AttrName
-  options: |-
-    allbut: Boolean
-  examples:
-    - |-
-      wrap(suppliers, [:city, :status], :extra)
-    - |-
-      wrap(suppliers, [:city, :status], :extra, allbut: true)
+name: wrap
+synopsis: |-
+  Tuple-valued attribute
+description: |-
+  Computes the relation obtained by removing `attributes` and replacing them
+  by a single attribute (`as`). The latter is a tuple-valued attribute
+  obtained by projecting the input tuple on `attributes`.
+  
+  This operators supports an ALL BUT variant, through the `allbut` option.
+  When set to true, the operator keeps specified attributes and wraps all
+  the remaining ones as a tuple-valued attribute.
+notes: |-
+  This operator does not compile to SQL so far. Contributions are welcome
+  to provide it with a SQL compilation for SQL DBMSs that support this kind
+  of feature (e.g. PostgreSQL with JSON data type)
+signature: |-
+  operand: Relation, attributes: AttrList, as: AttrName
+options: |-
+  allbut: Boolean
+examples:
+  - |-
+    wrap(suppliers, [:city, :status], :extra)
+  - |-
+    wrap(suppliers, [:city, :status], :extra, allbut: true)

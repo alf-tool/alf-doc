@@ -1,25 +1,25 @@
-- name: unwrap
-  synopsis: |-
-    Inverse of wrap
-  description: |-
-    Computes the relation obtained by unwrapping a tuple-valued attribute
-    `tva`. Unwrapping of `tva` on an input tuple `t` consists in removing
-    `tva` from `t` and extending the result with `tva`'s own attributes:
-    
-    ```
-    Tuple(x: 1, tva: Tuple(y: 2, z: 3)) -> Tuple(x: 1, y: 2, z: 3)
-    ```
-    
-    `tva` must be a tuple-valued attribute. It should not itself contain any
-    attribute whose name clashes with an attribute of `operand`. In the
-    examples above, `tva` may not contain an attribute called `x`.
-  notes: |-
-    This operator does not compile to SQL so far. Contributions are welcome
-    to provide it with a SQL compilation for SQL DBMSs that support this kind
-    of feature (e.g. PostgreSQL with JSON data type)
-  signature: |-
-    operand:Relation, tva:AttrName
-  options: |-
-  examples:
-    - |-
-      unwrap(wrap(suppliers, [:city, :status], :extra), :extra)
+name: unwrap
+synopsis: |-
+  Inverse of wrap
+description: |-
+  Computes the relation obtained by unwrapping a tuple-valued attribute
+  `tva`. Unwrapping of `tva` on an input tuple `t` consists in removing
+  `tva` from `t` and extending the result with `tva`'s own attributes:
+  
+  ```
+  Tuple(x: 1, tva: Tuple(y: 2, z: 3)) -> Tuple(x: 1, y: 2, z: 3)
+  ```
+  
+  `tva` must be a tuple-valued attribute. It should not itself contain any
+  attribute whose name clashes with an attribute of `operand`. In the
+  examples above, `tva` may not contain an attribute called `x`.
+notes: |-
+  This operator does not compile to SQL so far. Contributions are welcome
+  to provide it with a SQL compilation for SQL DBMSs that support this kind
+  of feature (e.g. PostgreSQL with JSON data type)
+signature: |-
+  operand: Relation, tva: AttrName
+options: |-
+examples:
+  - |-
+    unwrap(wrap(suppliers, [:city, :status], :extra), :extra)

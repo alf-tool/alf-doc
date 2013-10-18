@@ -1,31 +1,31 @@
-- name: concat
-  synopsis: |-
-    String concatenation
-  description: |-
-    Concatenates string representations of input values.
-  notes: |-
-    This aggregate function can be applied to any data type, not only String
-    attributes. Ruby's `to_s` will be used on values prior to concatenation.
-    
-    The options are:
-    
-    * `_before_` starts the resulting string (defaults to '')
-    * `_after_` ends the resulting string (defaults to '')
-    * `_between_` is used between each value
-    
-    As of current Alf version, the order in which the values are concatenated
-    is not guaranteed. This function is thus non-deterministic so far and
-    shoud probably be avoided if possible.
-  signature: |-
-    expr: AttrName|(Tuple->Numeric)
-  options: |-
-    before:String, between: String, after: String
-  examples:
-    - |-
-      concat(:name)
-    - |-
-      concat(:name, between: ', ')
-    - |-
-      concat(between: ', '){|t| t.name }
-    - |-
-      concat(->(t){ t.name.upcase }, between: ', ')
+name: concat
+synopsis: |-
+  String concatenation
+description: |-
+  Concatenates string representations of input values.
+notes: |-
+  This aggregate function can be applied to any data type, not only String
+  attributes. Ruby's `to_s` will be used on values prior to concatenation.
+  
+  The options are:
+  
+  * `_before_` starts the resulting string (defaults to '')
+  * `_after_` ends the resulting string (defaults to '')
+  * `_between_` is used between each value
+  
+  As of current Alf version, the order in which the values are concatenated
+  is not guaranteed. This function is thus non-deterministic so far and
+  shoud probably be avoided if possible.
+signature: |-
+  expr: AttrName|(Tuple->Numeric)
+options: |-
+  before: String, between: String, after: String
+examples:
+  - |-
+    concat(:name)
+  - |-
+    concat(:name, between: ', ')
+  - |-
+    concat(between: ', '){|t| t.name }
+  - |-
+    concat(->(t){ t.name.upcase }, between: ', ')

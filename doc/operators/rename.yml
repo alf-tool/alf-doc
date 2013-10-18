@@ -1,19 +1,19 @@
-- name: rename
-  synopsis: |-
-    Rename attributes
-  description: |-
-    Computes the same relation as `operand` expect that some attributes have
-    been renamed.
-  notes: |-
-    As of current version, renamings can only be expressed through a Hash
-    mapping input to output attribute names.
-    
-    Other ways of specifying renamining will be added in future versions, such
-    as prefixing, postfixing, renaming through a Proc, etc. Any patch towards
-    these improvements is welcome.
-  signature: |-
-    operand: Relation, renaming:Renaming
-  options: |-
-  examples:
-    - |-
-      rename(suppliers, :sid => :supplier_id, :city => :lives_in)
+name: rename
+synopsis: |-
+  Rename attributes
+description: |-
+  Computes the same relation as `operand` expect that some attributes have
+  been renamed.
+notes: |-
+  As of current version, renamings can only be expressed through a Hash
+  mapping input to output attribute names.
+  
+  Other ways of specifying renamining will be added in future versions, such
+  as prefixing, postfixing, renaming through a Proc, etc. Any patch towards
+  these improvements is welcome.
+signature: |-
+  operand: Relation, renaming: Renaming
+options: |-
+examples:
+  - |-
+    rename(suppliers, :sid => :supplier_id, :city => :lives_in)

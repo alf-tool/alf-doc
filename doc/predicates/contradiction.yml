@@ -1,12 +1,12 @@
-- name: contradiction
-  synopsis: |-
-    FALSE
-  description: |-
-    This predicate always return false. It is equivalent to `->(t){ false }`.
-  notes: |-
-  signature: ''
-  examples:
-    - |-
-      false
-    - |-
-      contradiction
+name: contradiction
+synopsis: |-
+  FALSE
+description: |-
+  This predicate always return false. It is equivalent to `->(t){ false }`.
+notes: |-
+signature: |-
+examples:
+  - |-
+    false
+  - |-
+    contradiction

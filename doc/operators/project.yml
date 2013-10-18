@@ -1,23 +1,23 @@
-- name: project
-  synopsis: |-
-    Keep a subset of attributes.
-  description: |-
-    Computes the relation obtained by projecting operand's tuples on a subset
-    of their attributes.
-    
-    This operator supports an ALL BUT variant, through the `allbut` option.
-    When set to true, the operator _removes_ specified attributes instead of
-    keeping them. An `allbut` operator is also provided that has the same
-    effect.
-  notes: |-
-    Unlike SQL, this operator ALWAYS remove duplicates. There is no way, in
-    Alf, to compute _bags_ of tuples.
-  signature: |-
-    operand: Relation, attributes:AttrList
-  options: |-
-    allbut: Boolean
-  examples:
-    - |-
-      project(suppliers, [:city])
-    - |-
-      project(suppliers, [:city], allbut: true)
+name: project
+synopsis: |-
+  Keep a subset of attributes.
+description: |-
+  Computes the relation obtained by projecting operand's tuples on a subset
+  of their attributes.
+  
+  This operator supports an ALL BUT variant, through the `allbut` option.
+  When set to true, the operator _removes_ specified attributes instead of
+  keeping them. An `allbut` operator is also provided that has the same
+  effect.
+notes: |-
+  Unlike SQL, this operator ALWAYS remove duplicates. There is no way, in
+  Alf, to compute _bags_ of tuples.
+signature: |-
+  operand: Relation, attributes: AttrList
+options: |-
+  allbut: Boolean
+examples:
+  - |-
+    project(suppliers, [:city])
+  - |-
+    project(suppliers, [:city], allbut: true)

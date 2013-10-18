@@ -1,43 +1,43 @@
-- name: frame
-  synopsis: |-
-    Aka limit/offset
-  description: |-
-    Computes a relation by restricting the tuples of `operand` to a particular
-    frame. This frame can be easily remembered through the "skip `offset`,
-    take `limit`" mnemonic mean, provided `order` is a total order.
-    
-    Formally, the frame is defined by those tuples whose ranking according to
-    `order` is such that `offset <= rank < limit`. In other words, this
-    operator is actually equivalent to the following definition:
-    
-    ```
-    def frame(operand, order, offset, limit)
-      allbut(
-        restrict(
-          rank(operand, order, :rank),
-          lte(offset, :rank) & lt(:rank, limit)),
-        [:rank])
-    end
-    ```
-    
-    As of current Alf version, for this operator to be semantically sound and
-    deterministic, `order` MUST be a total order, that is, it must at least
-    cover a candidate key. As of current Alf version, no error is raised if
-    this is not the case but that might change in future versions.
-  notes: |-
-    Contrary to the longer expression shown above, this operator compiles to
-    'efficient' SQL (rank does not, so far) at the cost of having to provide a
-    total order.
-    
-    As the result is a relation and relations are not ordered by definition,
-    the order in which tuples can be observed in the result (e.g. through
-    explicit tuple iteration, casting to an array, json encoding) is NOT
-    guaranteed to follow `order`.
-  signature: |-
-    operand: Relation, order:Ordering, offset:Integer, limit:Integer
-  options: |-
-  examples:
-    - |-
-      frame(suppliers, [:status, :sid], 0, 3)
-    - |-
-      frame(suppliers, [[:status, :asc], [:sid, :desc]], 1, 2)
+name: frame
+synopsis: |-
+  Aka limit/offset
+description: |-
+  Computes a relation by restricting the tuples of `operand` to a particular
+  frame. This frame can be easily remembered through the "skip `offset`,
+  take `limit`" mnemonic mean, provided `order` is a total order.
+  
+  Formally, the frame is defined by those tuples whose ranking according to
+  `order` is such that `offset <= rank < limit`. In other words, this
+  operator is actually equivalent to the following definition:
+  
+  ```try
+  def frame(operand, order, offset, limit)
+    allbut(
+      restrict(
+        rank(operand, order, :rank),
+        lte(offset, :rank) & lt(:rank, limit)),
+      [:rank])
+  end
+  ```
+  
+  As of current Alf version, for this operator to be semantically sound and
+  deterministic, `order` MUST be a total order, that is, it must at least
+  cover a candidate key. As of current Alf version, no error is raised if
+  this is not the case but that might change in future versions.
+notes: |-
+  Contrary to the longer expression shown above, this operator compiles to
+  'efficient' SQL (rank does not, so far) at the cost of having to provide a
+  total order.
+  
+  As the result is a relation and relations are not ordered by definition,
+  the order in which tuples can be observed in the result (e.g. through
+  explicit tuple iteration, casting to an array, json encoding) is NOT
+  guaranteed to follow `order`.
+signature: |-
+  operand: Relation, order: Ordering, offset: Integer, limit: Integer
+options: |-
+examples:
+  - |-
+    frame(suppliers, [:status, :sid], 0, 3)
+  - |-
+    frame(suppliers, [[:status, :asc], [:sid, :desc]], 1, 2)

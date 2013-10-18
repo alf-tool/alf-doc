@@ -1,43 +1,43 @@
-- name: union
-  synopsis: |-
-    Logical OR
-  description: |-
-    Computes the relation as the set union of `left` and `right` tuples.
-    
-    The `left` and `right` relations must be union-compatible, which in short
-    means that they must have same heading (type inheritance is partly
-    supported through ruby's own type system, so that the actual behavior is
-    slighlty more permissive).
-  notes: |-
-    Unlike SQL, this operator ALWAYS remove duplicates. There is no way, in
-    Alf, to compute _bags_ of tuples and therefore no way to express something
-    such as UNION ALL.
-    
-    The optimizer is not smart enough so far to discover when operands are
-    actually disjoint and duplicate removal not needed (e.g. the SQL compiler
-    never generates UNION ALL). Any patch improving this is welcome!
-    
-    Similarly, it is sometimes idiomatic in Alf to use `union` as a logical OR,
-    such as the example below. So far, the optimizer/compiler is not smart
-    enough to translate the former in the latter (which is likely to have a
-    better query plan, especially when using the SQL compiler and usual SQL
-    DBMSs). Any patch is welcome here too!
-    
-    ```
-    union(
-      restrict(suppliers, city: 'Paris'),
-      restrict(suppliers, city: 'London'))
-    ```
+name: union
+synopsis: |-
+  Logical OR
+description: |-
+  Computes the relation as the set union of `left` and `right` tuples.
+  
+  The `left` and `right` relations must be union-compatible, which in short
+  means that they must have same heading (type inheritance is partly
+  supported through ruby's own type system, so that the actual behavior is
+  slighlty more permissive).
+notes: |-
+  Unlike SQL, this operator ALWAYS remove duplicates. There is no way, in
+  Alf, to compute _bags_ of tuples and therefore no way to express something
+  such as UNION ALL.
+  
+  The optimizer is not smart enough so far to discover when operands are
+  actually disjoint and duplicate removal not needed (e.g. the SQL compiler
+  never generates UNION ALL). Any patch improving this is welcome!
+  
+  Similarly, it is sometimes idiomatic in Alf to use `union` as a logical OR,
+  such as the example below. So far, the optimizer/compiler is not smart
+  enough to translate the former in the latter (which is likely to have a
+  better query plan, especially when using the SQL compiler and usual SQL
+  DBMSs). Any patch is welcome here too!
+  
+  ```try
+  union(
+    restrict(suppliers, city: 'Paris'),
+    restrict(suppliers, city: 'London'))
+  ```
 
-    is equivalent to
+  is equivalent to
 
-    ```
-    restrict(suppliers, eq(:city, 'Paris') | eq(:city, 'London'))
-    ```
-    
-  signature: |-
-    left: Relation, right: Relation
-  options: |-
-  examples:
-    - |-
-      union(project(suppliers, [:city]), project(parts, [:city]))
+  ```try
+  restrict(suppliers, eq(:city, 'Paris') | eq(:city, 'London'))
+  ```
+  
+signature: |-
+  left: Relation, right: Relation
+options: |-
+examples:
+  - |-
+    union(project(suppliers, [:city]), project(parts, [:city]))
