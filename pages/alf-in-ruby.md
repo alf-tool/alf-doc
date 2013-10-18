@@ -119,41 +119,50 @@ not keep the tuples in memory and always recomputes them if needed. It does
 virtually denotes, but according to the relational expression it captures and
 the datasources it is attached to.
 
-`Relvar` instances are obtained through `Alf.relvar` and have an object-oriented
-API very similar to the one of `Relation`. A few differences and additional
-methods though:
+As `Relvar` instances are attached to particular data sources, they can only
+be obtained in the context of at least one database connection (see next
+section). Once obtained, they have an object-oriented API very similar to the
+one of `Relation`. A few differences and additional methods though:
 
 ```
 require 'alf'
 require 'sqlite3'
 
-relv = Alf.relvar("sap.sqlite3") do
-  restrict(suppliers, city: 'London')
+# See next section about this
+Alf.connect("sap.sqlite3") do |conn|
+
+  # Get a relvar, but remember that you can no longer use it when
+  # the connection has been closed!
+  relv = conn.relvar do
+    restrict(suppliers, city: 'London')
+  end
+
+  # Returns the set of tuples as a Relation
+  relv.value
+
+  # algebra
+  relv.project([:sid])  # returns another relvar, no actual computation
+
+  # update (VERY experimental, use with care, especially on virtual relvars)
+  relv.delete(predicate)
+  relv.insert(tuples)
+  relv.upsert(tuples)
+  relv.update(updating, predicate)
+  relv.affect(relation)
+
+  # locking (even more experimental)
+  relv.lock{
+    # executes the block with a lock on all underlying base relvars
+  }
+
 end
-
-# Returns the set of tuples as a Relation
-relv.value
-
-# algebra
-relv.project([:sid])  # returns another relvar, no actual computation
-
-# update (VERY experimental, use with care, especially on virtual relvars)
-relv.delete(predicate)
-relv.insert(tuples)
-relv.upsert(tuples)
-relv.update(updating, predicate)
-relv.affect(relation)
-
-# locking (even more experimental)
-relv.lock{
-  # executes the block with a lock on all underlying base relvars
-}
 ```
 
 ## Lower-level connection API
 
-When building more complex software, `Alf`'s facade API is simply not enough.
-The following example shows how to hack with lower-level `Alf::Database` and 
+When using relvars instead of relations and when building more complex
+software, `Alf`'s facade API is simply not enough. The following example shows
+more about hacking with lower-level `Alf::Database` and
 `Alf::Database::Connection` objects:
 
 ```
