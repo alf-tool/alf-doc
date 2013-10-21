@@ -15,6 +15,15 @@ module Alf
         @predicates ||= load_file("predicates")
       end
 
+      def examples
+        @examples ||= begin
+          ex = (Doc::ROOT/'examples').glob("*.alf").map do |file|
+            { source: file.read }
+          end
+          Relation(ex)
+        end
+      end
+
     private
 
       def load_file(who)

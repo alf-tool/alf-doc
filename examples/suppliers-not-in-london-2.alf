@@ -1,0 +1,2 @@
+# Get the suppliers, except those in London.
+not_matching(suppliers, Relation(city: 'London'))

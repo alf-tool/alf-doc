@@ -19,8 +19,13 @@ module Alf
         extend(Relation::DEE,
           predicates: predicates,
           operators: operators,
-          aggregators: aggregators)
+          aggregators: aggregators,
+          examples: examples)
       }
+    end
+
+    def self.examples
+      query{ examples }
     end
 
     def self.pages

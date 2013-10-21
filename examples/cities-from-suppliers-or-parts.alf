@@ -1,0 +1,4 @@
+# Get all cities where either a supplier or a part is located.
+union(
+  project(suppliers, [:city]),
+  project(parts, [:city]))

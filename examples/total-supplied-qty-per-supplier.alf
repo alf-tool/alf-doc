@@ -1,0 +1,2 @@
+# Get the total supplied qty per supplier number.
+summarize(supplies, [:sid], total: sum(:qty))

@@ -1,0 +1,2 @@
+# Get suppliers located in London or in Paris.
+restrict(suppliers, eq(:city, 'London') | eq(:city, 'Paris'))

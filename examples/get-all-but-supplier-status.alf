@@ -1,0 +1,2 @@
+# Get all suppliers, but their status and city.
+allbut(suppliers, [:status, :city])

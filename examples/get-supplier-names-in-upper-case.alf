@@ -1,0 +1,2 @@
+# Get supplier names in upper case.
+project(extend(suppliers, uppercase: ->(t){ t.name.upcase }), [:uppercase])

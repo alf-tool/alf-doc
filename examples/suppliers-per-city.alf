@@ -1,0 +1,2 @@
+# Get the suppliers grouped by city.
+group(suppliers, [:city], :in_city, allbut: true)

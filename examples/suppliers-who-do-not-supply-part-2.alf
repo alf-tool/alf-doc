@@ -1,0 +1,2 @@
+# Get suppliers who do *not* supply part P2.
+not_matching(suppliers, restrict(supplies, pid: 'P2'))

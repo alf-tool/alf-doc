@@ -1,0 +1,2 @@
+# Get suppliers located in London or in Paris.
+matching(suppliers, Relation(city: ['London', 'Paris']))

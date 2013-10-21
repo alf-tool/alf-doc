@@ -1,0 +1,2 @@
+# Get suppliers who have a 'a' in their name (case insensitive)
+restrict(suppliers, ->(t){ t.name =~ /a/i })

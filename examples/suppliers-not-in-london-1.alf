@@ -1,0 +1,2 @@
+# Get the suppliers, except those in London.
+minus(suppliers, restrict(suppliers, city: 'London'))

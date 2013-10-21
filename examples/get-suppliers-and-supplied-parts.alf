@@ -1,0 +1,3 @@
+# Get the suppliers together with the parts they supply.
+grouped = group(join(supplies, parts), [:sid], :supplied, allbut: true)
+join(suppliers, grouped)

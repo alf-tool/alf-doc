@@ -1,0 +1,2 @@
+# Get suppliers in Paris with status strictly greater than 20.
+restrict(suppliers, eq(:city, 'Paris') & gt(:status, 20))

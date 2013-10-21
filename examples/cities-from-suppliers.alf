@@ -1,0 +1,2 @@
+# Get the cities where at least one supplier is located.
+project(suppliers, [:city])
