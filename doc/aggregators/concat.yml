@@ -9,13 +9,12 @@ notes: |-
   
   The options are:
   
-  * `_before_` starts the resulting string (defaults to '')
-  * `_after_` ends the resulting string (defaults to '')
-  * `_between_` is used between each value
+  * `before` starts the resulting string (defaults to '')
+  * `after` ends the resulting string (defaults to '')
+  * `between` is used between each value
   
   As of current Alf version, the order in which the values are concatenated
-  is not guaranteed. This function is thus non-deterministic so far and
-  shoud probably be avoided if possible.
+  is not guaranteed. So far, this function is thus non-deterministic.
 signature: |-
   expr: AttrName|(Tuple->Numeric)
 options: |-

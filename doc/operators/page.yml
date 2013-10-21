@@ -7,9 +7,9 @@ description: |-
   tuples that belong to the `nth` page from the end (e.g., -1 is last page).
   
   Formally, the page is defined by those tuples whose ranking according to
-  `order` is such that `(nth-1)*page_size <= rank < nth*page_size`. In
-  other words, this operator is actually equivalent to the following
-  definition (ignoring negative page indexes for simplicity):
+  `order` is such that `(nth-1)*page_size <= rank < nth*page_size`. In other
+  words, this operator is almost equivalent to the following definition
+  (ignoring negative page indexes for simplicity):
   
   ```try
   def page(operand, order, nth, page_size)

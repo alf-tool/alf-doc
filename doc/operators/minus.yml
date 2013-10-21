@@ -2,22 +2,22 @@ name: minus
 synopsis: |-
   Logical AND NOT
 description: |-
-  Computes the relation as the set difference of `left` and `right` tuples.
+  Computes the relation as the set difference of `left` and `right`.
   
-  The `left` and `right` relations must be minus-compatible, which in
-  short means that they must have same heading (type inheritance is partly
-  supported through ruby's own type system, so that the actual behavior is
-  slighlty more permissive).
+  The `left` and `right` relations must be minus-compatible, which meaning
+  that they must have same heading (type inheritance is partly supported
+  through ruby's own type system, so that the actual behavior is slighlty more
+  permissive).
 notes: |-
   Unlike SQL, this operator ALWAYS remove duplicates. There is no way, in
   Alf, to compute _bags_ of tuples and therefore no way to express something
-  such as EXCEPT ALL.
+  such as SQL's EXCEPT ALL.
   
-  It is sometimes idiomatic in Alf to use `intersect` as a logical AND NOT,
-  such as the example below. So far, the optimizer/compiler is not smart
-  enough to translate the former in the latter (which is likely to have a
-  better query plan, especially when using the SQL compiler and usual SQL
-  DBMSs). Any patch is welcome here too!
+  It is sometimes idiomatic in Alf to use `intersect` as a logical AND NOT, as
+  illustrated below. So far, the optimizer/compiler is not smart enough to
+  translate the former into the latter (which is likely to have a better query
+  plan when using faithful SQL compilation and available SQL DBMSs). Any patch
+  is welcome here too!
   
   ```try
   minus(

@@ -5,7 +5,7 @@
 ## Signature
 
 ```
-+{name}(+{signature})
++{name}(+{signature}) -> Predicate
 ```
 
 ## Examples

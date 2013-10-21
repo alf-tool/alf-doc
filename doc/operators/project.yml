@@ -1,9 +1,9 @@
 name: project
 synopsis: |-
-  Keep a subset of attributes.
+  Keeps only a subset of attributes.
 description: |-
-  Computes the relation obtained by projecting operand's tuples on a subset
-  of their attributes.
+  Computes the relation obtained by projecting tuples from `operand` on a
+  subset of their attributes.
   
   This operator supports an ALL BUT variant, through the `allbut` option.
   When set to true, the operator _removes_ specified attributes instead of

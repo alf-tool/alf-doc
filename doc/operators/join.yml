@@ -33,13 +33,13 @@ notes: |-
   project(restrict(pairs, neq(:part_city, :supplier_city)), [:sid, :pid])
   ```
   
-  As obviously demonstrated by the example above, such kind of query is
-  rather cumbersome to write and verbous. Future versions of Alf will come
-  with useful shortcuts and new operators. In the mean time, don't forget
-  that defining your own shortcuts and operators is somewhat easy! Don't
-  hesitate to contribute them if of general purpose.
+  As obviously demonstrated by the example above, such query is rather
+  cumbersome to write and verbous. Future versions of Alf will come with
+  useful shortcuts and new operators. In the mean time, don't forget that
+  defining your own shortcuts and operators is easy! Don't hesitate to
+  contribute them if of general purpose.
   
-  Last, natural joins tend to be error prone; in particular, you must take
+  Last, natural join tends to be error prone; in particular, you must take
   care of common attributes of your design on which you do not want to join
   (such as `latest_change` and `deleted` fields and the like). Renamings and
   projections are worth having at hand when joining.

@@ -6,7 +6,7 @@ description: |-
   on `by` attributes then extending each tuple `t` with the result of
   aggregations defined by `aggs` on the tuples from `operand` matching `t`.
   
-  In SQL-ish terms, `SELECT [by], [agg] FROM operand GROUP BY [by]`.
+  In SQL terms, `SELECT [by], [agg] FROM operand GROUP BY [by]`.
 notes: |-
   As of current Alf version, this operator cannot be translated to SQL code.
   That means that all computations are done in ruby, which may seriously

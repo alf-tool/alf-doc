@@ -5,20 +5,21 @@ description: |-
   Computes a relation as a subset of `left` tuples for which no tuple from
   `right` would join on common attributes.
   
-  This operator is the inverse of `matching`, as the shortcut definition
-  below shows. It keeps all tuples from `left` but those that matches on
-  right.
+  This operator is the inverse of `matching`, as shown by the definition
+  below. It keeps all tuples from `left` but those that match a tuple from
+  `right`.
   
   ```try
   def not_matching(left, right)
     minus(left, matching(left, right))
   end
+  not_matching(suppliers, supplies)
   ```
   
   The synonym 'where not exists' comes from the fact that, since right
-  attributes do not appear in the result, it may seem more intuitive to
-  think about this operator as filtering tuples from left where _there does
-  not exist_ any tuple from right that _would_ join. In SQL-ish terms:
+  attributes do not appear in the result, it may seem more intuitive to think
+  about this operator as filtering tuples from left where _there does not
+  exist_ any tuple from right that _would_ join. In SQL terms:
   
   ```
   SELECT * FROM left WHERE NOT EXISTS (SELECT * FROM right WHERE [join condition])

@@ -8,12 +8,13 @@ description: |-
   This operator is the inverse of `project`. While the latter _keeps_
   attributes, this one _removes_ them. `project` actually supports an allbut
   variant, which is equivalent to this operator. In other words, this
-  operator can be seen as being the following shortcut:
+  operator can be understood as follows:
   
   ```try
   def allbut(operand, attributes)
     project(operand, attributes, allbut: true)
   end
+  allbut(suppliers, [:city, :status])
   ```
 notes: |-
   Unlike SQL, this operator ALWAYS remove duplicates. There is no way, in

@@ -6,14 +6,14 @@ description: |-
   `right` tuple would join on common attributes.
   
   This operator, also known as semi-join, can be explained through the
-  shortcut definition below. As shown, it basically consists in joining
-  `left` and `right` relations and then projecting back on `left`
-  attributes.
+  definition below. As shown, it consists in joining `left` and `right`
+  relations and projecting the result back on `left` attributes.
   
   ```try
   def matching(left, right)
     project(join(left, right), left.attr_list)
   end
+  matching(suppliers, supplies)
   ```
   
   Or, in SQL terms:
@@ -22,10 +22,10 @@ description: |-
   SELECT left.* FROM left NATURAL JOIN right
   ```
   
-  The synonym 'where exists' comes from the fact that, since right
-  attributes are projected away, it may seem more intuitive to think about
-  this operator as filtering tuples from left where _there exists_ some
-  tuple at right that _would_ join. In SQL-ish terms:
+  The synonym 'where exists' comes from the fact that, since right attributes
+  are projected away, it may seem more intuitive to think about this operator
+  as filtering tuples from left where _there exists_ some tuple at right that
+  _would_ join. In SQL terms:
   
   ```
   SELECT * FROM left WHERE EXISTS (SELECT * FROM right WHERE [join condition])
@@ -33,8 +33,9 @@ description: |-
 notes: |-
   As for (natural) `join`, you must take care of ensuring that the list of
   common attributes on which the matching applies corresponds to what you
-  want. Renamings and projections are worth having at hand when joining.
-  Alternatively, shortcuts can be considered. A (advanced) example below:
+  want. Renamings and projections are worth having at hand when using
+  matching. Alternatively, shortcuts can be considered. A (advanced) example
+  below:
   
   ```try
   # Same as matching(left, right) except that only attributes in `wish`

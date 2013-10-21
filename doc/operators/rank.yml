@@ -2,22 +2,22 @@ name: rank
 synopsis: |-
   Tuple ranking
 description: |-
-  Extends tuples from the input relation with a new attribute (`as`)
-  capturing the tuple position with respect to `order`.
+  Extends tuples from `operand` with a new attribute (`as`) capturing the
+  tuple position with respect to `order`.
   
-  The ranking of a tuple `t` is more precisely defined as the number of
-  tuples from the input operand that strictly come before `t` if they were
-  all ordered according to `order`. 'Equal' tuples with respect to `order`
-  are not counted in this ranking.
+  The ranking of a tuple `t` is more precisely defined as the number of tuples
+  from `operand` that would come strictly before `t` if they were all ordered
+  according to `order`. 'Equal' tuples with respect to `order` are not counted
+  in this ranking.
   
-  This means that, unless `order` is a total order, duplicate ranking may
-  be observed in practice. In contrast, if `order` covers a candidate key
-  then the ranking attribute (`as`) is unique, and therefore defines an
-  additional candidate key on the resulting relation.
+  This means that, unless `order` is a total order, duplicate ranking may be
+  observed. In contrast, if `order` covers a candidate key then the ranking
+  attribute (`as`) is unique, and therefore defines an additional candidate
+  key for the resulting relation.
 notes: |-
   Note that this operator does not compile to SQL so far. The `page` and
   `frame` operators provide useful alternatives when the aim is to compute
-  a subset of tuples based on their ranking according to an order.
+  a subset of tuples based on a ranking.
 signature: |-
   operand: Relation, order: Ordering, as: AttrName
 options: |-

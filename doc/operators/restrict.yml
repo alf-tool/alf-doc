@@ -6,7 +6,7 @@ description: |-
   predicate evaluates to TRUE.
 notes: |-
   As of current Alf version, native predicates (through ruby `Proc` objects)
-  cannot be optimized nor compiled to SQL. The use of high-level predicates
+  cannot be optimized nor compiled to SQL. The use of predicate factories
   (`eq`, `gt`, etc.) is strongly recommanded.
 signature: |-
   operand: Relation, predicate: Predicate

@@ -1,13 +1,13 @@
 name: extend
 synopsis: |-
-  Extend input tuples with derived/computed attributes
+  Extends input tuples with derived/computed attributes
 description: |-
   Computes a relation which is the same as `operand`, except that each of
   its tuples has new attributes whose value is the result of evaluating the
   tuple expressions specified in `ext`.
 notes: |-
   As of current Alf version, this operator cannot be translated to SQL code.
-  That means that all computations are done in ruby, which may seriously
+  In other words, all computations are done in ruby, which may seriously
   hurt performance.
   
   Similarly, as `extend` tends to be a showstopper during compilation, it is

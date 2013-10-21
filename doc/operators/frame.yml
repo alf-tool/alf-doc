@@ -15,9 +15,10 @@ description: |-
     allbut(
       restrict(
         rank(operand, order, :rank),
-        lte(offset, :rank) & lt(:rank, limit)),
+        lte(offset, :rank) & lt(:rank, offset+limit)),
       [:rank])
   end
+  frame(suppliers, [:city, :sid], 2, 3)
   ```
   
   As of current Alf version, for this operator to be semantically sound and
