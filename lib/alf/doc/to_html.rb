@@ -36,10 +36,13 @@ module Alf
       end
 
       def to_html(src)
-        src = src.gsub(/```try\n(.*?)\n```/m){|m|
-          source = $1.strip
-          quoted = source.gsub(/'/, "\\\\'")
-          %Q{```\n#{source}\n```\n<div class="try-this" ><a ng-click="$state.transitionTo('try', {src: '#{quoted}'})">Try it!</a></div>}
+        src = src.gsub(/([ ]*)```try\n(.*?)\n([ ]*)```/m){|m|
+          spacing = $1 || ""
+          source  = $2.strip.gsub(/^#{spacing}/, "")
+          quoted  = source.gsub(/'/, "\\\\'")
+          source  = "```\n#{source}\n```"
+          source  = source.gsub(/^/, spacing)
+          %Q{#{source}\n<div class="try-this" ><a ng-click="$state.transitionTo('try', {src: '#{quoted}'})">Try it!</a></div>}
         }
         options = {:fenced_code_blocks => true}
         Redcarpet::Markdown.new(HTMLwithAlbino, options).render(src)
