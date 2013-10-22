@@ -1,6 +1,7 @@
 require 'wlang'
 require 'albino'
 require 'redcarpet'
+require 'base64'
 module Alf
   module Doc
     class ToHtml
@@ -39,10 +40,10 @@ module Alf
         src = src.gsub(/([ ]*)```try\n(.*?)\n([ ]*)```/m){|m|
           spacing = $1 || ""
           source  = $2.strip.gsub(/^#{spacing}/, "")
-          quoted  = source.gsub(/'/, "\\\\'")
+          quoted  = Base64.encode64(source)
           source  = "```\n#{source}\n```"
           source  = source.gsub(/^/, spacing)
-          %Q{#{source}\n<div class="try-this" ><a ng-click="$state.transitionTo('try', {src: '#{quoted}'})">Try it!</a></div>}
+          %Q{#{source}\n<div class="try-this"><a href="/?src=#{quoted}" target="_blank">Try it!</a></div>}
         }
         options = {:fenced_code_blocks => true}
         Redcarpet::Markdown.new(HTMLwithAlbino, options).render(src)
