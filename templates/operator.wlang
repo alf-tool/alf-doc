@@ -22,6 +22,7 @@
 +{description}
 
 ?{notes.strip.empty?}{}{
+
 ## Implementation notes
 
 +{notes}

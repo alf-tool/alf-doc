@@ -2,11 +2,10 @@ require 'wlang'
 require 'albino'
 require 'redcarpet'
 require 'base64'
+require_relative 'to_markdown'
 module Alf
   module Doc
     class ToHtml
-
-      TEMPLATES = Path.backfind('templates')
 
       class HTMLwithAlbino < Redcarpet::Render::HTML
         def block_code(code, language)
@@ -15,25 +14,19 @@ module Alf
       end
 
       def operator(op)
-        to_html(to_markdown(TEMPLATES/"operator.wlang", op))
+        to_html(ToMarkdown.new.operator(op))
       end
 
       def aggregator(op)
-        to_html(to_markdown(TEMPLATES/"aggregator.wlang", op))
+        to_html(ToMarkdown.new.aggregator(op))
       end
 
       def predicate(op)
-        to_html(to_markdown(TEMPLATES/"predicate.wlang", op))
+        to_html(ToMarkdown.new.predicate(op))
       end
 
       def page(md)
         to_html(md)
-      end
-
-    private
-
-      def to_markdown(tpl, context)
-        WLang::Html.render(tpl, context)
       end
 
       def to_html(src)
@@ -49,6 +42,6 @@ module Alf
         Redcarpet::Markdown.new(HTMLwithAlbino, options).render(src)
       end
 
-    end # class Markdowner
+    end # class ToHtml
   end # module Doc
 end # module Alf
