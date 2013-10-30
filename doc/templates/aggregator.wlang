@@ -5,7 +5,7 @@
 ## Signature
 
 ```
-+{name}(+{signature}) -> Predicate
++{name}(+{signature}) -> Aggregator
 ```
 
 ## Examples
@@ -21,6 +21,7 @@
 +{description}
 
 ?{notes.strip.empty?}{}{
+
 ## Implementation notes
 
 +{notes}

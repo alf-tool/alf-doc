@@ -29,11 +29,11 @@ module Alf
     end
 
     def self.pages
-      (ROOT/'pages').glob("*.md")
+      (DOC_ROOT/'pages').glob("*.md")
     end
 
     def self.blog
-      (ROOT/'blog').glob("*.md")
+      (DOC_ROOT/'blog').glob("*.md")
     end
 
     def self.each_api

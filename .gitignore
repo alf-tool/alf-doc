@@ -2,5 +2,4 @@ coverage/*
 *.DS_Store
 pkg
 .bundle
-html
-man
+compiled

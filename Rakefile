@@ -12,3 +12,4 @@ end
 
 # We run tests by default
 task :default => :test
+task :doc => [:txt, :man, :html]

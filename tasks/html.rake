@@ -1,7 +1,7 @@
 namespace :html do
 
   ROOT = Path.dir.parent
-  HTML = ROOT/'html'
+  HTML = ROOT/'compiled/html'
 
   desc "Generates all API in html"
   task :api do

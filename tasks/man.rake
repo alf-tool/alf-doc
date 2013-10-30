@@ -1,5 +1,5 @@
 task :man do
-  MAN =  Path.dir.parent/'man'
+  MAN = Path.dir.parent/'compiled/man'
   require 'alf/doc/to_markdown'
   require 'md2man'
   require 'md2man/roff/engine'

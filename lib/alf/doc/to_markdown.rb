@@ -3,7 +3,7 @@ module Alf
   module Doc
     class ToMarkdown
 
-      TEMPLATES = Path.backfind('templates')
+      TEMPLATES = Path.backfind('doc/templates')
 
       def operator(op)
         to_markdown(TEMPLATES/"operator.wlang", op)
