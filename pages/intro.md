@@ -17,9 +17,9 @@ The query language aims at being as intuitive as possible, even if some
 background is definitely needed. Two main directions here:
 
 * Make sure to eventually read the [relational
-  basics](/doc/relational-basics).
+  basics](/doc/pages/relational-basics).
 * If you do not know ruby, make sure to eventually read the [ruby
-  basics](/doc/ruby-basics).
+  basics](/doc/pages/ruby-basics).
 
 # How to get started outside of try-alf.org ?
 
@@ -37,6 +37,6 @@ alf --examples show suppliers
 alf --db="postgres://user:password@host/database" show tablename
 ```
 
-Have a look at the [Alf in Ruby](/doc/alf-in-ruby) and [Alf in
+Have a look at the [Alf in Ruby](/doc/pages/alf-in-ruby) and [Alf in
 Shell](/doc/alf-in-shell) pages for getting started depending on the kind of
 context in which you plan to use it.

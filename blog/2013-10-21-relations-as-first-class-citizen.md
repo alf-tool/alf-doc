@@ -70,7 +70,7 @@ lies in the kind of data abstraction exposed to the software developer:
   [ActiveRecord](http://guides.rubyonrails.org/active_record_querying.html)),
 * [Alf](https://github.com/alf-tool/alf) and
   [Axiom](https://github.com/dkubb/axiom) expose _Relations_ (i.e. [sets of
-  tuples](/doc/relational-basics)) and relational algebra. For those
+  tuples](/doc/pages/relational-basics)) and relational algebra. For those
   interested, I'll discuss the differences between Alf and Axiom later in this
   blog post. In the mean time and unless stated otherwise, what is said about
   Alf applies to Axiom too.
@@ -608,8 +608,8 @@ with Object-Relational Mappers:
 join(suppliers, group(join(supplies, parts), [:sid], :supplied_parts, allbut: true))
 ```
 
-Alf already has a few high-level operators such as [matching](/doc/matching)
-or [page](/doc/page). The next release should include a few others currently
+Alf already has a few high-level operators such as [matching](/doc/api/matching)
+or [page](/doc/api/page). The next release should include a few others currently
 evaluated on case studies: `ite`, `image`, `abstract`, `quota`, etc.
 
 ### Database viewpoints
@@ -644,7 +644,7 @@ restrict(supplies, sid: 'S1')
 
 Database viewpoints are currently read-only in Alf. I intentionnally left the
 question of database updates aside in this blog post. Alf comes only with a
-very experimental interface for updates (cfr. [Alf in Ruby](#/doc/alf-in-ruby))
+very experimental interface for updates (cfr. [Alf in Ruby](/doc/pages/alf-in-ruby))
 but a lot of work is still needed in this area.
 
 ### Reconciling heterogeneous type systems

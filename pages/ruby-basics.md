@@ -11,8 +11,8 @@ to be a ruby expert to:
 
 Integrating the query language inside ruby-based software is another story, of
 course. This page provides you with sufficient knowledge of ruby for the
-scenarios above. Don't miss the [Alf in Ruby](/doc/alf-in-ruby) and [Alf in
-Shell](/doc/alf-in-shell) pages for getting started concretely.
+scenarios above. Don't miss the [Alf in Ruby](/doc/pages/alf-in-ruby) and [Alf in
+Shell](/doc/pages/alf-in-shell) pages for getting started concretely.
 
 An important note first. Relational algebra can be seen as a purely functional
 kind of programming. For this reason and on very intent, the overview here
