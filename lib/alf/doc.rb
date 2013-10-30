@@ -32,6 +32,10 @@ module Alf
       (DOC_ROOT/'pages').glob("*.md")
     end
 
+    def self.commands
+      (DOC_ROOT/'commands').glob("*.md")
+    end
+
     def self.blog
       (DOC_ROOT/'blog').glob("*.md")
     end
