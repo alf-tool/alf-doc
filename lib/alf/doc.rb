@@ -32,5 +32,17 @@ module Alf
       (ROOT/'pages').glob("*.md")
     end
 
+    def self.blog
+      (ROOT/'blog').glob("*.md")
+    end
+
+    def self.each_api
+      [:operators, :predicates, :aggregators].each do |kind|
+        Alf::Doc.query(kind).each do |obj|
+          yield(kind.to_s[0...-1].to_sym, obj.name, obj)
+        end
+      end
+    end
+
   end # module Doc
 end # module Alf

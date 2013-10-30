@@ -13,11 +13,17 @@ GEM
     albino (1.3.3)
       posix-spawn (>= 0.3.6)
     backports (2.8.2)
+    binman (3.3.2)
+      opener (>= 0.1.0, < 1)
     citrus (2.4.1)
     diff-lcs (1.2.4)
     domain (1.0.0)
+    md2man (2.0.2)
+      binman (~> 3.0)
+      redcarpet (~> 3.0)
     myrrha (3.0.0)
       domain (~> 1.0)
+    opener (0.1.0)
     path (1.3.3)
     posix-spawn (0.3.6)
     quickl (0.4.3)
@@ -44,9 +50,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  albino (~> 1.3.3)
+  albino (~> 1.3)
   alf-core!
+  md2man (~> 2.0)
   rake (~> 10.0)
-  redcarpet
+  redcarpet (~> 3.0)
   rspec (~> 2.12)
-  wlang (~> 2.0)
+  wlang (~> 2.1)

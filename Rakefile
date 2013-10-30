@@ -1,5 +1,5 @@
-# We run tests by default
-task :default => :test
+$:.unshift(File.expand_path('../lib', __FILE__))
+require 'alf-doc'
 
 #
 # Install all tasks found in tasks folder
@@ -9,3 +9,6 @@ task :default => :test
 Dir["tasks/*.rake"].each do |taskfile|
   load taskfile
 end
+
+# We run tests by default
+task :default => :test

@@ -1,6 +1,9 @@
 template-info:
   name: "alf.noe"
   version: 0.2.0
+  manifest:
+    Rakefile:
+      safe-override: false
 variables:
   lower:
     doc
@@ -18,6 +21,9 @@ variables:
     - http://github.com/blambeau/alf
   dependencies:
     - {name: alf-core,  version: "~> 0.15.0", groups: [runtime]}
-    - {name: wlang,     version: "~> 2.1",    groups: [runtime]}
+    - {name: wlang,     version: "~> 2.1",    groups: [development]}
+    - {name: redcarpet, version: "~> 3.0",    groups: [development]}
+    - {name: albino,    version: "~> 1.3",    groups: [development]}
+    - {name: md2man,    version: "~> 2.0",    groups: [development]}
     - {name: rake,      version: "~> 10.0",   groups: [development]}
     - {name: rspec,     version: "~> 2.12",   groups: [development]}
