@@ -1,3 +1,4 @@
+desc "Generate .txt pages"
 task :txt do
   TXT = Path.dir.parent/'compiled/txt'
   TXT.mkdir_p

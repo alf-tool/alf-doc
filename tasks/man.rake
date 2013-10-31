@@ -1,3 +1,4 @@
+desc "Generate man pages"
 task :man do
   MAN = Path.dir.parent/'compiled/man'
   MAN.mkdir_p

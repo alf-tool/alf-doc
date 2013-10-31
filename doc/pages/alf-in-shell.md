@@ -96,6 +96,13 @@ to another one. Converting a .csv file to .json?
 cat suppliers.csv | alf --stdin=csv --json show stdin
 ```
 
+And some extra. Want to search over content served by a RESTful web service?
+What countries use euros, for instance?
+
+```
+curl http://restcountries.eu/rest | alf --stdin=json show "restrict(stdin, currency: 'EUR')"
+```
+
 ## Using an .alfrc file
 
 When invoked from the command line, Alf looks after a `.alfrc` in the current
