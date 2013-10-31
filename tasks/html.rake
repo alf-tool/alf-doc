@@ -35,4 +35,5 @@ namespace :html do
     end
   end
 end
+desc "Generates all HTML pages"
 task :html => [:"html:api", :"html:pages", :"html:blog"]
