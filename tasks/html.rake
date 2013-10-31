@@ -1,4 +1,5 @@
 namespace :html do
+  require "alf/doc/to_html"
 
   ROOT = Path.dir.parent
   HTML = ROOT/'compiled/html'
@@ -7,7 +8,6 @@ namespace :html do
   task :api do
     # API
     (HTML/'api').mkdir_p
-    require "alf/doc/to_html"
     Alf::Doc.each_api do |kind, name, obj|
       target = HTML/"api/#{name}.html"
       puts "#{name} -> #{target}"
