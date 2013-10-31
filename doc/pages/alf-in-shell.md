@@ -81,19 +81,19 @@ Other data formats are available through `--csv` and `--yaml` and `--rash`
 
 ## Piping and data conversion
 
-Alf also supports receiving data from its standard input. Suppose for example
-that you want to restrict some json tuples outputted by some process, here a
-simple `cat`:
+Alf also supports receiving data from its standard input through a special
+`stdin` operand. Suppose for example that you want to restrict some csv
+tuples outputted by a process, here a simple `cat`:
 
 ```
-cat suppliers.json | alf --stdin=json show "restrict(stdin, city: 'London')"
+cat suppliers.csv | alf --stdin=csv show "restrict(stdin, city: 'London')"
 ```
 
 That means that you can very easily use alf to convert from one data format
 to another one. Converting a .csv file to .json?
 
 ```
-cat suppliers.csv | alf --stdin=csv --json show 
+cat suppliers.csv | alf --stdin=csv --json show stdin
 ```
 
 ## Using an .alfrc file
