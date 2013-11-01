@@ -19,6 +19,7 @@ description: |-
         lte((nth-1)*page_size, :rank) & lt(:rank, nth*page_size)),
       [:rank])
   end
+  page(suppliers, [:status, :sid], 1, 3)
   ```
   
   As of current Alf version, for this operator to be semantically sound and
