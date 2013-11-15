@@ -76,5 +76,8 @@ Relational algebra at your fingertips
   `explain`
     Show the logical (optimizer) and physical (compiler) plans of a query.
 
+  `repl`
+    Launches Alf's Read-Eval-Print-Loop (REPL) web application.
+
 See `alf help COMMAND` for details about a specific command or `alf help
 OPERATOR` for documentation of a relational operator.
