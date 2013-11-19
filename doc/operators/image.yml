@@ -1,0 +1,37 @@
+name: image
+synopsis: |-
+  Extend the left operand with a new relation-valued attribute, image of the
+  tuple in the right relation.
+description: |-
+  This operator extends each tuple of the left operand, say `t`, with a new
+  attribute called `as`. The latter is a relation-valued attribute, and is the
+  image of `t` with respect to the right relation. The image is defined as a
+  restriction-projection: restriction on tuples that match `t` and projection
+  on all but common attributes between left and right.
+
+  In other words, this operator is a shortcut for the following longer
+  expression:
+
+  ```try
+  def image(left, right, as)
+    extend(left, as => ->(t){
+      allbut(
+        matching(right, Relation(t)),
+        left.attr_list & right.attr_list)
+    })
+  end
+  image(suppliers, supplies, :supplying)
+  ```
+
+  Note that the image operator is such that every tuple of the left operand
+  appears in the result, including those whose image is empty on right. As
+  expected, an empty relation of correct relation type is used for those.
+notes: |-
+  As of current Alf version, the current SQL compilation is not optimal and
+  partly relies on in-memory operations. Please check the compilation plans.
+signature: |-
+  left: Relation, right: Relation, as: AttrName
+options: |-
+examples:
+  - |-
+    image(suppliers, supplies, :supplying)
