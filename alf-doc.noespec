@@ -14,7 +14,7 @@ variables:
   upper:
     Doc
   version:
-    0.15.0
+    0.16.0
   summary:
     Documentation of Alf relational algebra
   description: |-

@@ -16,11 +16,13 @@ Gem::Specification.new do |s|
                  inject([]){|files, pattern| files + Dir[File.join(here, pattern.strip)]}.
                  collect{|x| x[(1+here.size)..-1]}
 
+
   s.add_development_dependency("wlang", "~> 2.1")
   s.add_development_dependency("redcarpet", "~> 3.0")
   s.add_development_dependency("albino", "~> 1.3")
   s.add_development_dependency("md2man", "~> 2.0")
   s.add_development_dependency("rake", "~> 10.0")
   s.add_development_dependency("rspec", "~> 2.12")
-  s.add_dependency("alf-core", "~> 0.15.0")
+  s.add_dependency("alf-core", "0.16.0")
+
 end
