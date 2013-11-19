@@ -1,9 +1,5 @@
 source 'http://rubygems.org'
 
-group :runtime do
-  gem "alf-core", path: "../alf-core"
-end
-
 group :development do
   gem "wlang", "~> 2.1"
   gem "redcarpet", "~> 3.0"
@@ -11,4 +7,8 @@ group :development do
   gem "md2man", "~> 2.0"
   gem "rake", "~> 10.0"
   gem "rspec", "~> 2.12"
+end
+
+group :runtime do
+  gem "alf-core", path: "../alf-core"
 end
