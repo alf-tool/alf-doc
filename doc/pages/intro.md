@@ -38,5 +38,5 @@ alf --db="postgres://user:password@host/database" show tablename
 ```
 
 Have a look at the [Alf in Ruby](/doc/pages/alf-in-ruby) and [Alf in
-Shell](/doc/alf-in-shell) pages for getting started depending on the kind of
-context in which you plan to use it.
+Shell](/doc/pages/alf-in-shell) pages for getting started depending on the
+kind of context in which you plan to use it.
