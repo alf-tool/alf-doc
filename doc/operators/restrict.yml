@@ -7,7 +7,7 @@ description: |-
 notes: |-
   As of current Alf version, native predicates (through ruby `Proc` objects)
   cannot be optimized nor compiled to SQL. The use of predicate factories
-  (`eq`, `gt`, etc.) is strongly recommanded.
+  (`eq`, `gt`, etc.) is strongly recommended.
 signature: |-
   operand: Relation, predicate: Predicate
 options: |-

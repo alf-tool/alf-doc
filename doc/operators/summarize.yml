@@ -13,7 +13,7 @@ notes: |-
   hurt performance.
   
   Similarly, as `summarize` tends to be a showstopper during compilation, it
-  is strongly recommanded to use it as high as possible in query expressions
+  is strongly recommended to use it as high as possible in query expressions
   trees so as to delegate the largest possible query parts to data engines.
 signature: |-
   operand: Relation, by: AttrList, aggs: Summarization

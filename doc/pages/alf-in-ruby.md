@@ -113,7 +113,7 @@ optimization, in-memory implementation. Called on a `Relation`, a relational
 operator returns a `Relation`.
 
 For this reason, working with the `Relation` class is not always a good
-choice. For example, it is not recommanded when you want to incrementally
+choice. For example, it is not recommended when you want to incrementally
 build complex queries against a data source, if you need to avoid loading all
 tuples in memory, or if you want to use logical query optimization.
 
