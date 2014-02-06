@@ -1,6 +1,6 @@
 # How to learn Alf?
 
-This documentation comes with a log of examples that you can try online. This
+This documentation comes with a lot of examples that you can try online. This
 is probably one of the most efficient ways to learn. More specifically, here
 is a possible roadmap:
 
@@ -10,7 +10,7 @@ is a possible roadmap:
 * Try to understand the definitions when an operator can be defined in terms
   of other operators. Those definitions use the closure property of relational
   algebra a lot. From there, jump to another operator.
-* If needed, have a loot at predicates and other concepts to better understand
+* If needed, have a look at predicates and other concepts to better understand
   the language and operator signatures.
 
 The query language aims at being as intuitive as possible, even if some
