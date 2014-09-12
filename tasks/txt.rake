@@ -14,7 +14,7 @@ task :txt do
 
   # COMMANDS
   Alf::Doc.commands.each do |md|
-    target = TXT/"#{md.basename.rm_ext}.man"
+    target = TXT/"#{md.basename.rm_ext}.txt"
     puts "#{md} -> #{target}"
     target.write(md.read)
   end
