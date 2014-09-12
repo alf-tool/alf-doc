@@ -1,3 +1,7 @@
+# 0.16.4 - 2014-09-12
+
+* Fix missing .txt files for main commands
+
 # 0.16.3 - 2014-07-25
 
 * No change in this submodule.
