@@ -64,4 +64,4 @@ signature: |-
 options: |-
 examples:
   - |-
-    join(suppliers, supplies)
+    join(suppliers, shipments)

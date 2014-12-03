@@ -13,7 +13,7 @@ description: |-
   def matching(left, right)
     project(join(left, right), left.attr_list)
   end
-  matching(suppliers, supplies)
+  matching(suppliers, shipments)
   ```
   
   Or, in SQL terms:
@@ -53,4 +53,4 @@ signature: |-
 options: |-
 examples:
   - |-
-    matching(suppliers, supplies)
+    matching(suppliers, shipments)

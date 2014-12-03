@@ -21,8 +21,8 @@ options: |-
   allbut: Boolean
 examples:
   - |-
-    summarize(supplies, [:sid], total: sum(:qty))
+    summarize(shipments, [:sid], total: sum(:qty))
   - |-
-    summarize(supplies, [:sid], total: sum{|t| t.qty * 2 })
+    summarize(shipments, [:sid], total: sum{|t| t.qty * 2 })
   - |-
-    summarize(supplies, [:pid, :qty], {total: sum{|t| t.qty * 2 }}, allbut: true)
+    summarize(shipments, [:pid, :qty], {total: sum{|t| t.qty * 2 }}, allbut: true)

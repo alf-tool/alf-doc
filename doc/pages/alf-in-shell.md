@@ -28,12 +28,12 @@ $ alf show suppliers
 Please note that the `.csv` extension must not be specified. In fact, Alf
 connects to the current folder as if it was a database, so that recognized
 files are seen as candidate relations. In other words, the example below
-works as soon as `suppliers` and `supplies` can be tracked to recognized files.
+works as soon as `suppliers` and `shipments` can be tracked to recognized files.
 Try it yourself using <a target="_blank" href="/downloads/suppliers.csv">suppliers.csv</a>
-and <a target="_blank" href="/downloads/supplies.json">supplies.json</a>:
+and <a target="_blank" href="/downloads/shipments.json">shipments.json</a>:
 
 ```sh
-$ alf show "join(suppliers, supplies)"
+$ alf show "join(suppliers, shipments)"
 ```
 
 ## Querying databases

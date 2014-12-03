@@ -82,7 +82,7 @@ closure property of relational algebra (the fact that you invoke an operator
 on the result of a previous one):
 
 ```
-project(join(supplies, parts), [:pid, :name, :qty])
+project(join(shipments, parts), [:pid, :name, :qty])
 ```
 
 We also occasionally use the prefix notation for invoking type selectors,

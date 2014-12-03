@@ -20,7 +20,7 @@ description: |-
         left.attr_list & right.attr_list)
     })
   end
-  image(suppliers, supplies, :supplying)
+  image(suppliers, shipments, :supplying)
   ```
 
   Note that the image operator is such that every tuple of the left operand
@@ -34,4 +34,4 @@ signature: |-
 options: |-
 examples:
   - |-
-    image(suppliers, supplies, :supplying)
+    image(suppliers, shipments, :supplying)

@@ -13,7 +13,7 @@ description: |-
   def not_matching(left, right)
     minus(left, matching(left, right))
   end
-  not_matching(suppliers, supplies)
+  not_matching(suppliers, shipments)
   ```
   
   The synonym 'where not exists' comes from the fact that, since right
@@ -35,4 +35,4 @@ signature: |-
 options: |-
 examples:
   - |-
-    not_matching(suppliers, supplies)
+    not_matching(suppliers, shipments)

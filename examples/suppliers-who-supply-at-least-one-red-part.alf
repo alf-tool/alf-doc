@@ -1,2 +1,2 @@
 # Get suppliers who supply at least one red part.
-matching(suppliers, matching(supplies, restrict(parts, color: 'Red')))
+matching(suppliers, matching(shipments, restrict(parts, color: 'Red')))

@@ -501,7 +501,7 @@ the coupling between the main query and the sub-query:
 
 ```
 # Show suppliers that supply no part at all (Sequel)
-DB[:suppliers___s].where(~DB[:supplies___sp].where(Sequel.qualify(:sp, :sid) => (Sequel.qualify(:s, :sid))).exists)
+DB[:suppliers___s].where(~DB[:shipments___sp].where(Sequel.qualify(:sp, :sid) => (Sequel.qualify(:s, :sid))).exists)
 ```
 
 It is dead simple in Alf (and here, you can thank <a
@@ -510,7 +510,7 @@ target="_blank"><b>Tutorial D</b></a>, where this operator comes from):
 
 ```try
 # Show suppliers that supply no part at all (Alf)
-not_matching(suppliers, supplies)
+not_matching(suppliers, shipments)
 ```
 
 Now, relational calculus and relation algebra are known to be equivalent in
@@ -764,7 +764,7 @@ known](http://stackoverflow.com/questions/97197/what-is-the-n1-selects-issue)
 with Object-Relational Mappers:
 
 ```try
-join(suppliers, group(join(supplies, parts), [:sid], :supplied_parts, allbut: true))
+join(suppliers, group(join(shipments, parts), [:sid], :supplied_parts, allbut: true))
 ```
 
 Alf already has a few high-level operators such as [matching](/doc/api/matching)
@@ -790,7 +790,7 @@ end
 def parts
   restrict(super, city: 'London')
 end
-def supplies
+def shipments
   # restore foreign keys given the previous restrictions
   matching(matching(super, parts), suppliers)
 end
@@ -798,7 +798,7 @@ end
 
 # Query as usual. This is entirely transparent.
 # Check it yourself, supplier S2 no longer exists in this viewpoint.
-restrict(supplies, sid: 'S1')
+restrict(shipments, sid: 'S1')
 ```
 
 Database viewpoints are currently read-only in Alf. I intentionnally left the

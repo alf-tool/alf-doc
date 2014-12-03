@@ -1,5 +1,5 @@
-# Show the suppliers, the parts and the supplies.
+# Show the suppliers, the parts and the shipments.
 extend(DEE,
   suppliers: ->(t){ suppliers },
   parts:     ->(t){ parts     },
-  supplies:  ->(t){ supplies  })
+  shipments: ->(t){ shipments })

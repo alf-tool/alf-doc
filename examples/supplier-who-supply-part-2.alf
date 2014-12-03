@@ -1,2 +1,2 @@
 # Get suppliers who supply part P2.
-matching(suppliers, restrict(supplies, pid: 'P2'))
+matching(suppliers, restrict(shipments, pid: 'P2'))

@@ -1,2 +1,2 @@
 # Get suppliers who supply no part at all.
-not_matching(suppliers, supplies)
+not_matching(suppliers, shipments)
