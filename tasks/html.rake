@@ -27,6 +27,8 @@ namespace :html do
 
   desc "Generates blog in HTML"
   task :blog do
+    Encoding.default_internal = Encoding::UTF_8
+    Encoding.default_external = Encoding::UTF_8
     (HTML/'blog').mkdir_p
     Alf::Doc.blog.each do |page|
       target = HTML/"blog/#{page.rm_ext.basename}.html"
