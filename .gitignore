@@ -5,3 +5,5 @@ pkg
 compiled
 Gemfile.lock
 Gemfile.ci.lock
+vendor
+bin
