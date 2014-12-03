@@ -101,11 +101,11 @@ So I ended up with this question: *Can I design a friendly syntax, and still pro
 Drawing inspirations from Eve, Elixir, Haskell, Ruby, and Alf itself I've ended up with the proposal below:
 
 ```ruby
-suppliers                                      suppliers
-  | join shipments                               | join shipments
-  | restrict @city = "London"                    | matching (parts | restrict @color = 'Red')
-  | project @sid, @pid, @name, @qty              | restrict @city = "London"
-                                                 | project @sid, @pid, @name, @qty
+suppliers                                   suppliers
+  | join shipments                            | join shipments
+  | restrict @city = "London"                 | matching (parts | restrict @color = 'Red' | project [:pid])
+  | project @sid, @pid, @name, @qty           | restrict @city = "London"
+                                              | project @sid, @pid, @name, @qty
 ```
 
 (The query transformation that brings the query at right from the one at left mimics the inclusion of a new data requirement: *From suppliers and their shipments ... yet only shipments of red parts ...*)
@@ -113,23 +113,24 @@ suppliers                                      suppliers
 Contrast the query above with Alf's functional syntax and what it takes, in terms of indentation and parenthesizing, to go from the query at left to the one at right:
 
 ```ruby
-project(                                       project(
-  where(                                         where(
-    join(shipments, suppliers),                    matching(
-    city: "London"),                                 join(shipments, suppliers),
-  [:sid, :pid, :name, :qty]                          restrict(parts, color: 'Red')),
-                                                   city: "London"),
-                                                 [:sid, :pid, :name, :qty])
+project(                                    project(
+  where(                                      where(
+    join(shipments, suppliers),                 matching(
+    city: "London"),                              join(shipments, suppliers),
+  [:sid, :pid, :name, :qty])                      project(
+                                                    restrict(parts, color: 'Red'),
+                                                    [:pid])),
+                                                city: "London"),
+                                              [:sid, :pid, :name, :qty])
 ```
-
 Both queries in SQL too, mostly for the record:
 
 ```sql
-SELECT S.sid, SP.pid, S.name, SP.qty           SELECT S.sid, SP.pid, S.name, SP.qty
-FROM suppliers S                               FROM suppliers S
-  NATURAL JOIN shipments SP                      NATURAL JOIN shipments SP
-WHERE S.city = 'London'                        WHERE S.city = 'London'
-                                               AND SP.pid IN (
+SELECT S.sid, SP.pid, S.name, SP.qty        SELECT S.sid, SP.pid, S.name, SP.qty
+FROM suppliers S                            FROM suppliers S
+  NATURAL JOIN shipments SP                   NATURAL JOIN shipments SP
+WHERE S.city = 'London'                     WHERE S.city = 'London'
+                                            AND SP.pid IN (
                                                  SELECT pid FROM parts 
                                                  WHERE color = 'Red' )
 ```
