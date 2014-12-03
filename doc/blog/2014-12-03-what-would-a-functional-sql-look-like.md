@@ -17,7 +17,7 @@ Before explaining this syntax, why it matters (does it?), and the advantages it 
 
 ## Motivation
 
-The actual trigger for working on the query syntax above is Chris Granger & Al's [Eve](http://incidentalcomplexity.com/). Eve embeds a datalog/relational-like manipulation language. When playing with Eve examples a few weeks ago, I was slightly hindered of using the nice syntax without completely understanding its underlying semantics. I've therefore tried to make a precise sense of it by myself. I ended up with a slightly different proposal, a mix between Eve and [Elixir's pipe operator](http://elixir-lang.org/docs/stable/elixir/Kernel.html#|>/2), à la sauce [Alf](http://www.try-alf.org/blog/2013-10-21-relations-as-first-class-citizen). I'm not sure it is even similar to Eve, but is it important? The credits are, because the good parts of the syntax above are then borrowed from Eve and Elixir. The semantics here is mine (see below), yet the relational algebra itself is from C.J. Date and Hugh Darwen [**Tutorial D**](http://www.thethirdmanifesto.com/).
+I started working on the syntax above after having played with [Eve](http://incidentalcomplexity.com/), by Chris Granger & al. Eve embeds a datalog/relational-like manipulation language. When playing with Eve examples a few weeks ago, I was slightly hindered of using Eve syntax without completely understanding its intended semantics. I've therefore tried to make a precise sense of it by myself. Doing so, I ended up with a slightly different proposal, a mix between Eve and [Elixir's pipe operator](http://elixir-lang.org/docs/stable/elixir/Kernel.html#|>/2), à la sauce [Alf](http://www.try-alf.org/blog/2013-10-21-relations-as-first-class-citizen). I'm not sure it is even similar to Eve, but is that important? The credits are, because the good parts of the syntax above are thus borrowed from Eve and Elixir. The semantics here is mine (see below), yet the relational algebra itself is from C.J. Date and Hugh Darwen [**Tutorial D**](http://www.thethirdmanifesto.com/).
 
 More generally, it's been more than one year since the [introductory post on Alf and relations as first-class citizen](http://www.try-alf.org/blog/2013-10-21-relations-as-first-class-citizen). In the past year, I've collected an impressive amount of experience using Alf on different database and software engineering projects, with many successes and only few difficulties. To quickly summarize the approach.
 
@@ -31,7 +31,7 @@ qry = restrict(qry, city: "London")            #   among those located in London
 qry = project(qry, [:sid, :pid, :name, :qty])  #   select the ids, supplier name and shipped qty
 ```
 
-in other words, and without relying on variable assignment (which is not that functional-minded after all), you end up with something like this (referred to as Alf's purely functional syntax hereafter):
+Without relying on variable assignment (which is not that functional-minded after all), you end up with something like this (referred to as Alf's purely functional syntax hereafter):
 
 ```try
 project(
@@ -43,13 +43,14 @@ project(
 
 ### Powerful
 
-Moreover, by modeling relational algebra with the application of functions to argument *values* (in contrast to dedicated syntactic terms), Alf provides a dynamic way of writing queries. So, selecting suppliers in a particular city, based on some context is easy:
+By exposing relational algebra as strict application of functions to argument *values* (in contrast to dedicated syntactic terms), Alf provides a dynamic way of writing queries. Possibly, it should be thought of as a data manipulation language more than a query language.
+
+To give a trivial example of what I'm talking about, consider the query below. The attribute
+list on which the projection applies can easily be computed. That is, the projection operator takes an attribute list *value* as argument, and that value can result from evaluating an
+expression (that's a sharp tool, I know, I'll come back to that):
 
 ```try
-def suppliers_in(c)
-  restrict(suppliers, city: c)
-end
-join(suppliers_in(ask_which_city_to_user), shipments)
+project(suppliers, [:sid, :city] + [:name])
 ```
 
 This dynamic nature is even more exemplified by Alf allowing the definition of user-defined relational operators. For instance, the documentation shows how you can add a 'safe' join. The latter allows specifying on which attributes the join must apply, projecting away the other common attributes from the right operand, that would otherwise be taken into account by Alf's (natural) join:
@@ -62,11 +63,11 @@ def join_on(left, right, on)
   join(left, allbut(right, commons - on))      # join is *natural* join in Alf
 end
 
-# Part's name is projected away and join applies on :city only
+# The part :name will be projected away, so the join applies on :city only
 join_on(suppliers, parts, [:city])
 ```
 
-In short, I'm looking for a query language that is more dynamic than SQL and even more *structured* than it. Despite its name, and even if you can compose SQL queries in a way similar to what is shown here, SQL seriously lacks lightweight and easy to use structuring mechanisms. The latter should help you **reason** about the task at hand while also raising the level of abstraction along the way, e.g. through composable user-defined relational operators.
+Beyond Alf itself, I'd like a data manipulation language that would be more dynamic than SQL and even more *structured* than it. Despite its name, and even if you can compose SQL queries in a way similar to what is shown here, SQL seriously lacks lightweight and easy to use structuring mechanisms. The latter should help you *reason* about the task at hand while also raising the level of abstraction along the way, e.g. through composable user-defined relational operators.
 
 ### A few weaknesses
 
@@ -93,7 +94,7 @@ suppliers
   .project([:sid, :name, :city])
 ```
 
-So I ended up with this question: *Can I design a friendly syntax, and still provide it with a sound and simple functional semantics?*. And the answer is yes.
+So I ended up with this question: *Can I design a friendly syntax, and still provide it with a sound and simple functional semantics?*. The answer is yes.
 
 ## Relational Algebra: a friendly functional syntax
 
@@ -133,17 +134,17 @@ WHERE S.city = 'London'                        WHERE S.city = 'London'
                                                  WHERE color = 'Red' )
 ```
 
-The syntax proposal has many advantages over Alf syntaxes shown in previous section and SQL itself:
+My new syntax seems to have many advantages in comparison to Alf and SQL itself:
 
 * Not too many parentheses are required, unlike Alf's purely functional syntax,
 * The proposal does not rely on variable assignment, nor does it use object-oriented confusing constructs,
 * Inserting a new relational operator into an existing expression is as simple as adding a new line, as shown by the query at right,
 * As illustrated too, it is still easy to embed sub-expressions; the syntax thereby nicely exposes the compositional nature of relational algebra.
-* The syntax can still be given a formal functional semantics (in terms of lambda calculus); in other words, it can be made precise.
+* The syntax can still be given a formal functional semantics (e.g. terms of lambda calculus); in other words, it can be made precise.
 
-## A brief overview of semantics
+## Brief overview of the semantics
 
-What is the semantics of it? Let me first start by removing the syntactic sugar, getting closer to Alf regarding argument values:
+What might be the semantics of the language sketch here? Let me start by removing the syntactic sugar, getting closer to Alf regarding argument values:
 
 ``` ruby
 suppliers
@@ -163,7 +164,15 @@ Now, let define the pipe operator `|` as left associative and of very low priori
   | project [:sid, :pid, :name, :qty])
 ```
 
-Let also define `|` as an infix notation for function application, that is, `a | f  =  f a` (or `f(a)` if clearer for you, even if I will not use that kind of parenthesizing here). Some extra parenthesizing is required first:
+Let also define `|` as an infix notation for function application, that is,
+
+```haskell
+a | f  =  f a
+```
+
+(or `f(a)` if you want, even if I will not use that kind of parenthesizing here).
+
+Before desugarizing `|`, some extra parenthesizing is required:
 
 ```ruby
 (((suppliers
@@ -180,7 +189,7 @@ Then, expanding `|` yields:
     ((join shipments) suppliers))
 ```
 
-What does this suggest? Let take a shortened expression using the following shortcuts:
+What does it suggest? Let take a shortened expression thanks to the following definitions:
 
 ```
 attrList = [:sid, :pid, :name, :qty]
@@ -195,11 +204,11 @@ Then, you obtain the following expression:
 (project attrList) ((restrict predicate) ((join sp) s))
 ```
 
-This kind of expression has a special form, since every function abstraction takes only one argument. This is reminiscent of lambda calculus.
+This kind of expression has a special form, since every function abstraction takes only one argument. This is reminiscent of lambda calculus, that we might use to define the evaluation semantics of the language very precisely (I won't, at least not in this post).
 
 ## Signatures for Relational Operators
 
-The functional expression above suggests precise definitions for the relational operators (with inspiration from Haskell this time). Let introduce some notations first:
+The functional expression above suggests precise signatures for the relational operators (with inspiration from Haskell this time). Let me introduce some notations first:
 
 * let `[N]` denote the type 'set of attribute names' ; `N` will denote one of such sets, e.g. `[:sid, :name]`
 * let `{H}` denote the type 'tuples with heading `H`' ; `H` will denote such heading.
@@ -216,8 +225,7 @@ project :: [N] -> {{H}} -> {{I}}
   ensure  : I = H projected on N 
 ```
 
-The `project` operator takes a list of attribute names `N`. It returns a function that takes a relation with heading `H`
-as input and returns a relation with heading `I` as output. The `require` and `ensure` clauses must be properly formalized, but this is the subject for another post. Roughly, they encode some type-checking constraints that must be enforced either at compile time (a good challenge here, if anyone is interested) or injected as runtime checks.
+The `project` operator takes a list of attribute names `N`. It returns a function that takes a relation with heading `H` as input and returns a relation with heading `I` as output. The `require` and `ensure` clauses must be properly formalized, but it will be the topic of another post. Roughly, they encode type constraints that must either be enforced at compile time (a good challenge here, if anyone is interested) or injected as runtime checks.
 
 ### Restrict
 
@@ -227,51 +235,61 @@ restrict :: ({H} -> Boolean) -> {{H}} -> {{H}}
   ensure  : true
 ```
 
-The `restrict` operator takes as first argument a function from tuples with heading `H` to Boolean. It returns another function that takes a relation with same heading `H` as input and returns yet another relation with same heading. No `require` and `ensure` constraints are needed. The needed constraints are already enforced by the use of the `H` type variable.
+The `restrict` operator takes as first argument a function from tuples with heading `H` to `Boolean`s. It returns another function that takes a relation with same heading `H` as input and returns yet another relation with same heading. The `require` and `ensure` clauses are trivial here. The needed constraints are implicit, through the use of the shared `H` type variable.
 
 ### Join
 
 ```haskell
 join :: {{H}} -> {{I}} -> {{J}}
   require : H and I agree on the types of shared attribute names
-  ensure  : J = H + I, for some + operator for headings
+  ensure  : J = H + I, for some + operator on headings
 ```
 
 The `join` operator (binary join, in fact) takes a relation with heading `H` as input. It returns a function that takes another relation with heading `I` as input and returns yet another relation, with heading `J`. The output heading, `J` might be easily computed / constrained from inputs, using the (properly formalized) ensure clause.
 
-Other operators might then be defined similarly to built a relationaly complete algebra.
+Other operators might then be defined similarly to built a relationaly complete algebra. In addition, shorcuts operators can be easily defined, as in Alf:
+
+```haskell
+-- `allbut` is the reverse of project, it projects `relation` on all but
+-- the attributes in `list`
+-- (Let suppose that the signature is inferred.)
+allbut list relation =
+  relation
+    | project ((attrs rel) \ list)
+```
+
+```haskell
+-- `join_on` joins left and right relations on attributes in `list`. Attributes
+-- shared by `left` and `right` but not in `list` are first projected away from
+-- `right` (but are kept on `left` and therefore present in the result relation.)
+join_on list left right =
+  let commons = (attrs left) & (attrs right) in
+  left
+    | join (right | allbut (commons - list))
+```
 
 ## Conclusion: an avenue of challenges
 
 The post here provides an overview of what Alf aims to be, if one abstracts from the Ruby DSL. I'm actually interrested in designing a data (well, information) manipulation language that would have tuples and relations as first-class citizen. As other researchers, language designers and programmers out there, I believe that nice synergies have to be found between functional programming and the relational model towards that goal.
 
-The kind of treatment shown here is a simple example of such synergies and yields many open questions. For instance, what semantics are we looking for exactly? Relational algebra is already well defined, so that's surely not my goal. Functional programming is well defined too. Yet, it seems that the language sketched here needs a mix of both to be precisely defined. It seems that the language here actually evaluates to (or generates) relational *expressions*, whose semantics can then easily be defined. But how can we make this fully precise?
+The kind of treatment shown here is a simple example of such synergies. Yet it yields many open questions. For instance, what semantics are we looking for exactly? Relational algebra is already well defined, so that's surely not my goal. Functional programming is well defined too of course. Yet, it seems that the language sketched here needs a mix of both to be precisely defined. It seems that the language here actually evaluates to (or generates) relational *expressions*, whose semantics can then easily be defined. But how can we make this fully precise?
 
-Another serious challenge is to keep the dynamic nature of Alf, while providing compile-time guarantees such a type-checking. If one accepts the hybrid nature of the language, that evaluates to relational expressions not relations themselves, then it might be possible to type-check the following program:
+Another serious challenge is to keep the dynamic nature of Alf, while providing compile-time guarantees such a type-checking. If one accepts the hybrid nature of the language, that evaluates to relational expressions not relations themselves, then it might be possible to type-check the following program, that makes use of the operator definitions above:
 
 ```haskell
-allbut list relation =
-  relation
-    | project ((attrs rel) \ list)
-
-join_on on left right =
-  let commons = (attrs left) & (attrs right) in
-  left
-    | join (right | allbut (commons - on))
-
 suppliers
-  | join_on [:sid] shipments
+  | join_on [:city] parts
 ```
 
-Yet another challenge, possibly a tough one, is to derived type inference rules for the language sketched here. Such rules are actually needed for type-checking, otherwise the syntax has to be extended with type anotations and I'm not sure I want that:
+A related challenge, possibly a tough one, is to define type inference rules. Such rules are actually needed for type-checking, otherwise the syntax has to be extended with type anotations and I'm not sure I want that:
 
 ```haskell
   suppliers
     | restrict (t:{city: String...} -> t.city = "London")
 ```
 
-In addition, the type system has to be defined more precisely, and I'm sure serious difficulties hide down there.
+In addition, the type system needs to be defined more precisely, for type inference and type checking relations to be sound and complete. I'm sure there are plenty of nice research problems to be solved there.
 
-An avenue of challenges.
+In conclusion, a simple idea, yet an avenue of challenges.
 
-(If you liked this post, you should probably [follow me on twitter](http://twitter.com/blambeau), star [try-alf on github](http://github.com/alf-tool/try-alf), or simply [send me an email](mailto:blambeau@gmail.com).)
+(If you like this post, you should probably [follow me on twitter](http://twitter.com/blambeau), star [try-alf on github](http://github.com/alf-tool/try-alf), [send me an encouragement email](mailto:blambeau@gmail.com) or hire me on your next data problem!)
