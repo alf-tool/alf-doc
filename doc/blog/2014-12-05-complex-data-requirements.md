@@ -376,6 +376,41 @@ module SapOnCity
 end
 ```
 
+Why not including this viewpoint in our running example to see it in action?? Try it by yourself:
+
+```try
+def city_context
+  "London"
+end
+
+# Only suppliers located in London
+def suppliers
+  restrict(super(), city: city_context)
+end
+
+# Only parts located in London
+def parts
+  restrict(super(), city: city_context)
+end
+
+# Restore the foreign keys on shipments
+def shipments
+  matching(matching(super(), suppliers), parts)
+end
+
+###
+
+def collection
+  image(
+    suppliers,
+    join(
+      shipments,
+      rename(project(parts, [:pid, :name, :color]), :name => :pname)),
+    :supplies)
+end
+collection
+```
+
 ## Step 4: Authentication and context awareness
 
 I don't know your favorite definition of complexity / simplicity but mine would be something like:
