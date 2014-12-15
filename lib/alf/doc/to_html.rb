@@ -36,7 +36,7 @@ module Alf
           quoted  = Base64.encode64(source)
           source  = "```\n#{source}\n```"
           source  = source.gsub(/^/, spacing)
-          %Q{#{source}\n<div class="try-this"><a href="/?src=#{quoted}" target="_blank">Try it!</a></div>}
+          %Q{#{source}\n<a class="try-this" href="/?src=#{quoted}" target="_blank">Try!</a>}
         }
         options = {:fenced_code_blocks => true}
         Redcarpet::Markdown.new(HTMLwithAlbino, options).render(src)
