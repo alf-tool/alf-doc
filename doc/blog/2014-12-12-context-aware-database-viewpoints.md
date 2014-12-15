@@ -1,3 +1,5 @@
+<div class="blog-post-date">2014, December 12</div>
+
 # Context-aware Database Viewpoints
 
 Viewpoints are a concept that I have only mentionned in passing in [try-alf's first post](/blog/2013-10-21-relations-as-first-class-citizen). They certainly deserve more thoughts: while very simple you'll be amazed by their power. In short, viewpoints are to databases (variables) what views are to relations (variables). If the last sentence sounds cryptic, just read on! To keep this post self-contained, I need to start with some basic material on views before moving on to context-awareness and database viewpoints. A general comment before starting: don't get abused by the taste of triviality; simplicity, sometimes, is that simple.
