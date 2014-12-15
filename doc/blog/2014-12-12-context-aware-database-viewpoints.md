@@ -219,7 +219,7 @@ Viewpoints are simply the same idea, but applied to entire database schemas, loo
 * Only shipments of suppliers and parts we care about
 * Abstracting from the city, as we know it's London (or Paris, or whatever)
 
-This gives us a "sub database" if you want, that me might very well be queries as if it was the entire database. This is definitely what abstraction, and so-called [logical data independance](http://www.revision-zero.org/logical-data-independence), is about:
+This gives us a "sub database" if you want, that we might very well query as if it was the entire database. This is definitely what abstraction, and so-called [logical data independance](http://www.revision-zero.org/logical-data-independence), is about:
 
 ```try
 # Change me by Paris and see what happens
@@ -309,7 +309,7 @@ Then, under the hood, the database management system has to resolve `suppliers` 
 restrict(base.suppliers, city: "London")
 ```
 
-In other words, a similar mechanism to the one used previously, makes implicit what the context makes obvious (that users want to query the *last known* database value; yet is it that obvious after all?). That is, using the usual Ruby syntax of this blog post once again:
+In other words, a similar mechanism to the one used previously makes implicit what the context makes obvious (that users want to query the *last known* database value; yet is it that obvious after all?). That is, using the usual Ruby syntax of this blog post once again:
 
 ```ruby
 def base
