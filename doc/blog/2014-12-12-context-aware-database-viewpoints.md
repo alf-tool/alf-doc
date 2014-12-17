@@ -94,7 +94,7 @@ end
 restrict(london_suppliers_with_their_shipments, sid: "S1")
 ```
 
-So far, so good. Here is where I start complaining about SQL once again, I'm affraid.
+So far, so good. Here is where I start complaining about SQL once again, I'm afraid.
 
 ## Towards context-awareness: parameterized views
 
@@ -103,10 +103,10 @@ So far, so good. Here is where I start complaining about SQL once again, I'm aff
 * On behalf of a specific user,
 * Expecting results in a particular language (for internationalized data),
 * From a particular area in the world,
-* Targetting a specific audience,
+* Targeting a specific audience,
 * and so on.
 
-Such context frequenly leads to query parameters and developers then make use of prepared statements:
+Such context frequently leads to query parameters and developers then make use of prepared statements:
 
 ```sql
 SELECT * FROM suppliers WHERE city = ?
@@ -172,7 +172,7 @@ To sum up, a context-aware database interface/query language would allow denotin
 
 * Supports namespacing,
 * Supports parameterized queries,
-* Supports parameter values to be implicitely obtained from the context
+* Supports parameter values to be implicitly obtained from the context
 
 Demonstrating the feature on try-alf is a bit tricky: Alf relies on Ruby modules for creating contextes cleanly and modules are not allowed here for security reasons. In essence, however, the feature works as follows:
 
@@ -221,7 +221,7 @@ Viewpoints are simply the same idea, but applied to entire database schemas, loo
 * Only shipments of suppliers and parts we care about
 * Abstracting from the city, as we know it's London (or Paris, or whatever)
 
-This gives us a "sub database" if you want, that we might very well query as if it was the entire database. This is definitely what abstraction, and so-called [logical data independance](http://www.revision-zero.org/logical-data-independence), is about:
+This gives us a "sub database" if you want, that we might very well query as if it was the entire database. This is definitely what abstraction, and so-called [logical data independence](http://www.revision-zero.org/logical-data-independence), is about:
 
 ```try
 # Change me by Paris and see what happens
@@ -362,6 +362,10 @@ db = inLanguage(fromCity(base, "London"), "fr")
 restrict(db.suppliers, sid: "S1")
 ```
 
-And that's all for today. It's interresting to classify database viewpoint according to whether those functions are type preserving or not (that is, whether they preserve the database 'schema' itself), but that will be the topic of another post.
+And that's all for today. It's interesting to classify database viewpoint according to whether those functions are type preserving or not (that is, whether they preserve the database 'schema' itself), but that will be the topic of another post.
 
 (If you liked this post, you should probably [follow me on twitter](http://twitter.com/blambeau), star [try-alf on github](http://github.com/alf-tool/try-alf), [send me an encouragement email](mailto:blambeau@gmail.com) or hire me on your next data problem!)
+
+## Acknowledgements
+
+I'd like to thank Erwin S., James K. L. for their feedback and comments on earlier versions of this blog post.
