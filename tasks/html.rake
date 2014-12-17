@@ -34,6 +34,10 @@ namespace :html do
       target = HTML/"blog/#{page.rm_ext.basename}.html"
       puts "#{page} -> #{target}"
       target.write(Alf::Doc::ToHtml.new.page(page.read))
+      target.rm_ext.mkdir_p
+      page.rm_ext.glob("*.png") do |img|
+        img.cp target.rm_ext
+      end
     end
   end
 end
