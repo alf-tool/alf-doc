@@ -23,6 +23,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency("md2man", "~> 2.0")
   s.add_development_dependency("rake", "~> 10.0")
   s.add_development_dependency("rspec", "~> 2.12")
-  s.add_dependency("alf-core", "0.17.0")
+  s.add_dependency("alf-core", "0.18.0")
 
 end
